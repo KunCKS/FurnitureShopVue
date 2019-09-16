@@ -1,0 +1,10 @@
+@import "~bootstrap/scss/functions";
+@import "./helpers/_variables";
+@import "~bootstrap/scss/bootstrap";
+
+@import "./components/sideBar";
+@import "./components/navBar";
+@import "./components/menuBtn";
+@import "./components/footerContent";
+@import "./components/introduceSection";
+@import "_utilities.scss";

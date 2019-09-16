@@ -1,0 +1,11 @@
+$min-section-height: 400px;
+.introduce-section {
+  min-height: $min-section-height;
+  .introduce-section-title {
+    font-size: 1.5rem;
+  }
+  .introduce-section-content {
+    font-size: 0.8rem;
+    line-height: 2rem;
+  }
+}
