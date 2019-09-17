@@ -1,11 +1,21 @@
 <template>
   <div class="sideNav" id="sideNav">
-    <div class="side-bar">
-      <a href="#" class="menuBtn position-fixed" @click.prevent="flyoutShown" id="menuBtn">
+    <a
+      href="#"
+      class="menuBtn position-fixed d-md-block d-none"
+      @click.prevent="flyoutShown"
+      id="menuBtn"
+    >
+      <div class="btnBar"></div>
+      <div class="btnBar"></div>
+      <div class="btnBar"></div>
+    </a>
+    <div class="side-bar d-md-block d-none">
+      <!-- <a href="#" class="menuBtn position-fixed" @click.prevent="flyoutShown" id="menuBtn">
         <div class="btnBar"></div>
         <div class="btnBar"></div>
         <div class="btnBar"></div>
-      </a>
+      </a>-->
       <h3 class="side-bar-title m-0">ASIN DESIGN SENCE 2019</h3>
     </div>
     <nav class="flyout negative-row-margin">
@@ -50,7 +60,7 @@
           </li>
           <li class="nav-item">
             <div class="card border-0">
-              <div class="card-header p-0 border-0 bg-white" id="headingOne">
+              <div class="card-header p-0 border-0 bg-white" id="headingTwo">
                 <h5 class="mb-0">
                   <button
                     class="btn btn-link dropdown-toggle"
@@ -87,7 +97,7 @@
           </li>
           <li class="nav-item">
             <div class="card border-0">
-              <div class="card-header p-0 border-0 bg-white" id="headingOne">
+              <div class="card-header p-0 border-0 bg-white" id="headingThree">
                 <h5 class="mb-0">
                   <button
                     class="btn btn-link dropdown-toggle"
@@ -119,7 +129,7 @@
           </li>
           <li class="nav-item">
             <div class="card border-0">
-              <div class="card-header p-0 border-0 bg-white" id="headingOne">
+              <div class="card-header p-0 border-0 bg-white" id="headingFour">
                 <h5 class="mb-0">
                   <button
                     class="btn btn-link dropdown-toggle"
@@ -170,8 +180,7 @@ export default {
 
 <style lang="scss" scope>
 .menuBtn {
-  position: fixed;
-  left: calc((70px - 24px) / 2);
+  left: calc((4.5rem - 24px) / 2);
   //這邊帶入sidebar寬度及btn寬度來計算左側padding的距離
   top: 2rem;
 }

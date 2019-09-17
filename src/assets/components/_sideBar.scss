@@ -1,14 +1,14 @@
-$sidebar-revise-width: 70px;
-.sidebarPadding-revise {
-  padding-left: $sidebar-revise-width;
-}
+// $sidebar-revise-width: 4.5rem;
+// .sidebarPadding-revise {
+//   padding-left: $sidebar-revise-width;
+// }
 .sideNav {
   .side-bar {
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
-    width: 70px;
+    width: 4.5rem;
     border-right: 1px solid #e9eaec;
     z-index: 50;
     .side-bar-title {
@@ -25,7 +25,9 @@ $sidebar-revise-width: 70px;
     position: fixed;
     height: 100%;
     padding-top: 5.625rem;
-    width: calc(((100% - 5rem) / 3) + 5rem);
+    width: calc(((100% - 4.5rem) / 3) + 4.5rem);
+    min-width: 30rem;
+    max-width: 100%;
     transform: translateX(-110%);
     transition: transform 0.5s;
     z-index: 40;
@@ -33,9 +35,6 @@ $sidebar-revise-width: 70px;
     .flyout-content {
       padding: 1.875rem 0rem 0rem 8rem;
       height: 100%;
-      .navbar-nav {
-        // padding: 1.875rem 6.875rem 1.875rem 5rem;
-      }
       .nav-link {
         position: relative;
         &:after {

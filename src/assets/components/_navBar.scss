@@ -1,4 +1,7 @@
 $navBar-padding-revise: 1.25rem;
+.navbar {
+  z-index: 51;
+}
 .navBar-padding-revise {
   padding-top: $navBar-padding-revise;
   padding-bottom: $navBar-padding-revise;

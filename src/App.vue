@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <side-bar></side-bar>
-    <div class="sidebarPadding-revise">
+    <div class="pl-md-8">
       <div class="container">
         <nav-bar class="bg-white navBar-padding-revise negative-row-margin"></nav-bar>
       </div>
       <router-view />
     </div>
-    <footer class="sidebarPadding-revise">
+    <footer class="pl-md-8">
       <footer-content></footer-content>
     </footer>
   </div>

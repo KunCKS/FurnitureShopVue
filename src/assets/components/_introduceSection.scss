@@ -12,11 +12,19 @@ $min-section-height: 400px;
     filter: grayscale(50%);
   }
   .intro-img {
-    margin-top: -30px;
-    margin-bottom: -30px;
+    min-height: 340px;
   }
   .intro-img-designer {
-    margin-top: -30px;
-    margin-bottom: -30px;
+    min-height: 340px;
+  }
+  @include media-breakpoint-up(md) {
+    .intro-img {
+      margin-top: -30px;
+      margin-bottom: -30px;
+    }
+    .intro-img-designer {
+      margin-top: -30px;
+      margin-bottom: -30px;
+    }
   }
 }

@@ -1,16 +1,16 @@
 <template>
   <section>
     <div
-      class="row introduce-section my-9 no-gutters"
+      class="row introduce-section my-md-9 no-gutters"
       :class="{'flex-row-reverse':flexRowReverse}"
       :style="`background-color:${contentData.bgColor}`"
     >
-      <div class="col-6 p-5 d-flex flex-column justify-content-center">
+      <div class="col-md-6 intro-img">
+        <div class="bg-cover h-100" :style="`background-image:url('${contentData.imgUrl}')`"></div>
+      </div>
+      <div class="col-md-6 p-5 d-flex flex-column justify-content-center">
         <h5 class="introduce-section-title">{{contentData.title}}</h5>
         <p class="introduce-section-content mt-3">{{contentData.content}}</p>
-      </div>
-      <div class="col-6 intro-img">
-        <div class="bg-cover h-100" :style="`background-image:url('${contentData.imgUrl}')`"></div>
       </div>
     </div>
   </section>

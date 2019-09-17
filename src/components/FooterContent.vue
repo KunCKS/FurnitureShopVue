@@ -2,16 +2,16 @@
   <div class="bg-secondary py-4">
     <ul class="list-inline text-center mt-3">
       <li class="list-inline-item">
-        <a href="#" class="footer-icon-link footer-title mx-8">常見問題</a>
+        <a href="#" class="footer-icon-link footer-title mx-md-8 mx-3">常見問題</a>
       </li>
       <li class="list-inline-item">
-        <a href="#" class="footer-icon-link footer-title mx-8">展示品出清</a>
+        <a href="#" class="footer-icon-link footer-title mx-md-8 mx-3">展示品出清</a>
       </li>
       <li class="list-inline-item">
-        <a href="#" class="footer-icon-link footer-title mx-8">ASIN簡介</a>
+        <a href="#" class="footer-icon-link footer-title mx-md-8 mx-3">ASIN簡介</a>
       </li>
       <li class="list-inline-item">
-        <a href="#" class="footer-icon-link footer-title mx-8">加入我們的團隊</a>
+        <a href="#" class="footer-icon-link footer-title mx-md-8 mx-3">加入我們的團隊</a>
       </li>
     </ul>
     <ul class="list-inline text-center">

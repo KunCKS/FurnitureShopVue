@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 class="m-0 text-hide">ASin Design</h1>
     <carousel
       :per-page="1"
       :navigate-to="someLocalProperty"
@@ -9,7 +10,6 @@
       paginationPosition="bottom-overlay"
       paginationActiveColor="#ffffff"
       paginationColor="#e0e0e0"
-      class
     >
       <slide>
         <div
