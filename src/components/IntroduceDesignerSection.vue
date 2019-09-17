@@ -9,7 +9,7 @@
         <h5 class="introduce-section-title">{{contentData.title}}</h5>
         <p class="introduce-section-content mt-3">{{contentData.content}}</p>
       </div>
-      <div class="col-6 intro-img">
+      <div class="col-4 intro-img-designer ml-8">
         <div class="bg-cover h-100" :style="`background-image:url('${contentData.imgUrl}')`"></div>
       </div>
     </div>
@@ -20,6 +20,8 @@
 export default {
   props: ["contentData", "flexRowReverse"]
 };
+//這邊將文字內容及img資源綁定為物件包的內容，要使用時建立規定的物件內容即可呈現
+//另外綁定一個flexRowReverse參數（boolean值），用來選擇要不要反轉順序
 //這邊將文字內容及img資源綁定為物件包的內容，要使用時建立規定的物件內容即可呈現
 //另外綁定一個flexRowReverse參數（boolean值），用來選擇要不要反轉順序
 //以下為物件格式

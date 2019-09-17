@@ -2,6 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand p-0" href="#">
       <img src="../assets/ASIN_logo.svg" style="width:80px" alt />
+      <h1 class="m-0 text-hide">ASin Design</h1>
     </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto mr-3">
