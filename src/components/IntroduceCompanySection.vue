@@ -2,7 +2,7 @@
   <section>
     <div
       class="bg-cover d-flex justify-content-center flex-column align-items-center introduce-company-section"
-      style="background-image:url('https://images.unsplash.com/photo-1557618159-7d6fe547ae20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')"
+      style="background-image:url('https://images.unsplash.com/photo-1557618159-7d6fe547ae20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80')"
     >
       <h2 class="introduce-company-section-title h5 col-3 text-center text-white">傳承品質</h2>
       <p

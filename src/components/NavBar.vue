@@ -25,7 +25,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto mr-3">
+      <ul class="navbar-nav ml-auto">
         <li class="nav-item mr-2">
           <a class="nav-link" href="#" @click.prevent="toProducts">產品</a>
         </li>
@@ -39,7 +39,7 @@
           <a class="nav-link" href="#">查詢訂單</a>
         </li>
         <li class="nav-item mr-2">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="#" @click.prevent="toCart">
             <i class="fas fa-shopping-cart"></i>
           </a>
         </li>
@@ -65,6 +65,9 @@ export default {
     },
     toHome() {
       this.$router.push("/");
+    },
+    toCart() {
+      this.$router.push("/cart");
     }
   }
   // created() {

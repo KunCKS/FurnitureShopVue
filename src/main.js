@@ -3,11 +3,14 @@
 import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import VeeValidate from "vee-validate";
 import "bootstrap";
 import App from "./App";
 import router from "./router";
 
 Vue.config.productionTip = false;
+
+Vue.use(VeeValidate);
 
 /* eslint-disable no-new */
 new Vue({

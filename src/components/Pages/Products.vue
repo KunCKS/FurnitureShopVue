@@ -23,7 +23,8 @@ export default {
         sofa: {
           title: "新款沙發",
           content:
-            "如果您正尋找設計師沙發的最新設計，無需再躊躇。我們剛剛推出這些令人興奮的設計——現代家居的絕配。"
+            "如果您正尋找設計師沙發的最新設計，無需再躊躇。我們剛剛推出這些令人興奮的設計——現代家居的絕配。",
+          bgColor: "#fbfbfb"
         },
         chair: {
           title: "新款椅子",
@@ -38,7 +39,7 @@ export default {
           description: "Sit down please 名設計師設計",
           id: "-L9tH8jxVb2Ka_DYPwng",
           imageUrl:
-            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80",
           is_enabled: 1,
           num: 1,
           origin_price: 100,
@@ -52,7 +53,7 @@ export default {
           description: "Sit down please 名設計師設計",
           id: "-L9tH8jxVb2Ka_DYPwng",
           imageUrl:
-            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80",
           is_enabled: 1,
           num: 1,
           origin_price: 100,
@@ -66,7 +67,7 @@ export default {
           description: "Sit down please 名設計師設計",
           id: "-L9tH8jxVb2Ka_DYPwng",
           imageUrl:
-            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80",
           is_enabled: 1,
           num: 1,
           origin_price: 100,
@@ -80,7 +81,7 @@ export default {
           description: "Sit down please 名設計師設計",
           id: "-L9tH8jxVb2Ka_DYPwng",
           imageUrl:
-            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80",
           is_enabled: 1,
           num: 1,
           origin_price: 100,
@@ -94,7 +95,7 @@ export default {
           description: "Sit down please 名設計師設計",
           id: "-L9tH8jxVb2Ka_DYPwng",
           imageUrl:
-            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80",
           is_enabled: 1,
           num: 1,
           origin_price: 100,

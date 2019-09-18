@@ -1,5 +1,5 @@
 <template>
-  <ul class="navbar-nav p-0 sticky-top" id="accordionProducts">
+  <ul class="products-side-bar navbar-nav p-0 sticky-top mt-md-2" id="accordionProducts">
     <li class="nav-item">
       <div class="card border-0">
         <div class="card-header p-0 border-0 bg-white" id="productsHeadingOne">
@@ -134,3 +134,9 @@
     </li>
   </ul>
 </template>
+<style lang="scss" scope>
+.sticky-top {
+  top: 1.5rem;
+}
+//自定義sticky高度
+</style>

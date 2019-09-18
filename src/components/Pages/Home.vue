@@ -51,7 +51,7 @@ export default {
         content:
           "我們明白你最需要的功能，我們用心傾聽每個使用者的回饋，打造最好的設計。",
         imgUrl:
-          "https://images.unsplash.com/photo-1501516069922-a9982bd6f3bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+          "https://images.unsplash.com/photo-1501516069922-a9982bd6f3bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
         bgColor: "#f4f3ee"
       },
       contentDataMid: {
@@ -59,7 +59,7 @@ export default {
         content:
           "從我們如數家珍的文化、設計和激情中獲得靈感，找到屬於您自己的家居詮釋之道。瞭解創造與維護理想家居空間的指南與潮流。不在於追求完美的空間。而在於適合生活的一個家。",
         imgUrl:
-          "https://images.unsplash.com/photo-1543589365-3cc63c87243f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80",
+          "https://images.unsplash.com/photo-1543589365-3cc63c87243f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
         bgColor: "#e9eaec"
       },
       contentDataBtm: {
@@ -67,7 +67,7 @@ export default {
         content:
           "我們產品的設計理念來自於全世界最負盛譽的設計師。他們都有著多年行業頂尖專業經驗。但或許更重要的是我們對於偉大設計的共同解讀：經過精心思量的雅致產品，能夠反映我們所處的時代，並提升我們的生活品質。",
         imgUrl:
-          "https://images.unsplash.com/photo-1566810039093-63307ce3f6b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1176&q=80",
+          "https://images.unsplash.com/photo-1566810039093-63307ce3f6b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
         bgColor: "#f1f1f1"
       }
       //contentData物件內容參考IntroduceSection元件檔內容說明
