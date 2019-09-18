@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view name="side-bar"></router-view>
+    <side-bar></side-bar>
     <div class="pl-md-8">
       <div class="container">
         <nav-bar class="bg-white navBar-padding-revise negative-row-margin"></nav-bar>

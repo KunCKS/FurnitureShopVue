@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light bg-light" id="header-navbar">
+  <nav class="navbar navbar-expand-md navbar-light bg-light home-navbar-zindex" id="header-navbar">
     <a
       href="#"
       class="menuBtn position-absolute d-md-none"
@@ -10,9 +10,9 @@
       <div class="btnBar"></div>
       <div class="btnBar"></div>
     </a>
-    <a class="navbar-brand p-0 mx-md-0 mx-auto" href="#" @click.prevent="toHome">
+    <router-link class="navbar-brand p-0 mx-md-0 mx-auto" to="home">
       <img src="../assets/ASIN_logo.svg" style="width:80px" alt />
-    </a>
+    </router-link>
     <!-- <button
       class="navbar-toggler"
       type="button"
@@ -27,21 +27,21 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item mr-2">
-          <a class="nav-link" href="#" @click.prevent="toProducts">產品</a>
+          <router-link class="nav-link" to="products">產品</router-link>
         </li>
         <li class="nav-item mr-2">
-          <a class="nav-link" href="#">尋找靈感</a>
+          <router-link class="nav-link" to>尋找靈感</router-link>
         </li>
         <li class="nav-item mr-2">
-          <a class="nav-link" href="#">優惠訊息</a>
+          <router-link class="nav-link" to>優惠訊息</router-link>
         </li>
         <li class="nav-item mr-2">
-          <a class="nav-link" href="#">查詢訂單</a>
+          <router-link class="nav-link" to>查詢訂單</router-link>
         </li>
         <li class="nav-item mr-2">
-          <a class="nav-link" href="#" @click.prevent="toCart">
+          <router-link class="nav-link" to="cart">
             <i class="fas fa-shopping-cart"></i>
-          </a>
+          </router-link>
         </li>
       </ul>
       <!-- <form class="form-inline my-2 my-lg-0">
