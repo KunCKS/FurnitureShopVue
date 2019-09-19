@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <router-link class="navbar-brand col-sm-3 col-md-2 mr-0" to="/admin">Company name</router-link>
+      <router-link class="navbar-brand col-sm-3 col-md-2 mr-0" to="/admin">ASin DESIGN</router-link>
       <input
         class="form-control form-control-dark w-100"
         type="text"

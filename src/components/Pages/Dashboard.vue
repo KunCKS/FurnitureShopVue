@@ -25,7 +25,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-@import url("../../assets/components/_dashboard.scss");
-</style>

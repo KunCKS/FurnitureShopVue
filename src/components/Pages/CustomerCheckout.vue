@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="min-height:calc(100vh - 83.38px - 205.6px - 24px)">
     <div class="row justify-content-center my-4">
       <div class="col-12">
         <div class="form-row">

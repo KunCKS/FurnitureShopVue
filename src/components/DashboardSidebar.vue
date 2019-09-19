@@ -17,7 +17,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/admin/products">
+            <router-link class="nav-link" to="/admin/dashboardorders">
               <i class="far fa-list-alt"></i> 訂單列表
             </router-link>
           </li>

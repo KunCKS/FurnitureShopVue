@@ -10,7 +10,7 @@
       <div class="btnBar"></div>
       <div class="btnBar"></div>
     </a>
-    <router-link class="navbar-brand p-0 mx-md-0 mx-auto" to="home">
+    <router-link class="p-0 mx-md-0 mx-auto" to="home">
       <img src="../assets/ASIN_logo.svg" style="width:80px" alt />
     </router-link>
     <!-- <button

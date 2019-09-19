@@ -8,6 +8,7 @@ import CustomerOrder from "@/components/Pages/CustomerOrder";
 import CustomerCheckout from "@/components/Pages/CustomerCheckout";
 import Dashboard from "@/components/Pages/Dashboard";
 import DashBoardProducts from "@/components/Pages/DashBoardProducts";
+import DashboardOrders from "@/components/Pages/DashboardOrders";
 import Coupons from "@/components/Pages/Coupons";
 import NoPath from "@/components/Pages/noPath";
 Vue.use(Router);
@@ -65,6 +66,12 @@ export default new Router({
           name: "優惠券頁面",
           path: "coupons",
           component: Coupons
+          // meta: { requiresAuth: true }
+        },
+        {
+          name: "訂單頁面",
+          path: "dashboardorders",
+          component: DashboardOrders
           // meta: { requiresAuth: true }
         }
       ]

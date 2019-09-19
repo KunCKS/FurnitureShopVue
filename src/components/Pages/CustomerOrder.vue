@@ -1,5 +1,5 @@
 <template>
-  <div class="container pt-md-3 pb-md-5">
+  <div class="container pt-md-3 pb-md-5" style="min-height:calc(100vh - 83.38px - 205.6px)">
     <div class="row">
       <div class="col-12">
         <div class="form-row">

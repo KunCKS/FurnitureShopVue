@@ -1,0 +1,9 @@
+.products-card-img {
+  min-height: 200px;
+  @include media-breakpoint-up(md) {
+    min-height: 250px;
+  }
+  @include media-breakpoint-up(lg) {
+    min-height: 400px;
+  }
+}

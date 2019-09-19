@@ -1,19 +1,6 @@
 <template>
-  <div class="container pt-md-3 pb-md-5">
+  <div class="container pt-md-3 pb-md-5" style="min-height:calc(100vh - 83.38px - 205.6px)">
     <div class="row">
-      <div class="col-12">
-        <div class="form-row">
-          <div class="col-12 col-sm">
-            <div class="alert alert-primary text-center alert-rounded" role="alert">1.輸入訂單資料</div>
-          </div>
-          <div class="col-12 col-sm">
-            <div class="alert alert-light text-center alert-rounded" role="alert">2.金流付款</div>
-          </div>
-          <div class="col-12 col-sm">
-            <div class="alert alert-light text-center alert-rounded" role="alert">3.完成</div>
-          </div>
-        </div>
-      </div>
       <div class="col-md-8">
         <div class="h4 text-center">購 物 車 清 單</div>
         <table class="table">
