@@ -6,6 +6,7 @@ import Products from "@/components/Pages/Products";
 import Cart from "@/components/Pages/Cart";
 import CustomerOrder from "@/components/Pages/CustomerOrder";
 import CustomerCheckout from "@/components/Pages/CustomerCheckout";
+import Login from "@/components/Pages/Login";
 import Dashboard from "@/components/Pages/Dashboard";
 import DashBoardProducts from "@/components/Pages/DashBoardProducts";
 import DashboardOrders from "@/components/Pages/DashboardOrders";
@@ -48,6 +49,11 @@ export default new Router({
           path: "customercheckout",
           name: "CustomerCheckout",
           component: CustomerCheckout
+        },
+        {
+          path: "login",
+          name: "Login",
+          component: Login
         }
       ]
     },
@@ -59,8 +65,8 @@ export default new Router({
         {
           name: "產品頁面",
           path: "products",
-          component: DashBoardProducts
-          // meta: { requiresAuth: true }
+          component: DashBoardProducts,
+          meta: { requiresAuth: true }
         },
         {
           name: "優惠券頁面",

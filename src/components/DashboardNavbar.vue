@@ -22,14 +22,9 @@ export default {
   methods: {
     signout() {
       let vm = this;
-      console.log("APIPATH環境變數：", process.env.APIPATH);
-      const api = `${process.env.APIPATH}/logout`;
+      let api = `${process.env.APIPATH}/logout`;
       vm.$http.post(api).then(response => {
-        console.log(response.data);
-        if (response.data.success) {
-          vm.$router.push("/login");
-          console.log(response.data.message);
-        }
+        console.log("登出訊息:", response.data);
       });
     }
   }

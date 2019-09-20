@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div class="text-right py-3">
-      <button class="btn btn-large btn-secondary">新建產品</button>
-    </div>
-    <table class="table">
+    <loading :active.sync="isLoading"></loading>
+    <table class="table mt-3">
       <thead class="thead-light">
         <tr>
           <th scope="col" width="80">是否付款</th>
@@ -11,7 +9,7 @@
           <th scope="col" width="110">下單日期</th>
           <th scope="col">訂單留言</th>
           <th scope="col" width="100">訂單金額</th>
-          <th scope="col" width="130">編輯</th>
+          <th scope="col" width="80">編輯</th>
         </tr>
       </thead>
       <tbody>
@@ -30,66 +28,252 @@
           <td>{{item.message}}</td>
           <td class="text-right">{{item.total|currency}}</td>
           <td>
-            <button class="btn btn-primary btn-sm">編輯</button>
-            <button class="btn btn-danger btn-sm">刪除</button>
+            <button class="btn btn-primary btn-sm" @click="openModal(item)">編輯</button>
           </td>
         </tr>
       </tbody>
     </table>
+    <pagination :pagination="pagination" @gopage="getOrdersData"></pagination>
+    <div class="modal fade" id="OrderModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="OrderModalLabel">編輯訂單</h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="form-row">
+                <div class="col-md-3">
+                  <div class>下單日期：{{tempOrder.create_at|FormatTime}}</div>
+                </div>
+                <div class="col-md-5">
+                  <div class>訂單編號：{{tempOrder.id}}</div>
+                </div>
+                <div class="col-md-4">
+                  <label for="payment_methods">付款方式：</label>
+                  <select
+                    name="payment_methods"
+                    id="payment_methods"
+                    v-model="tempOrder.payment_method"
+                  >
+                    <option value="credit_card">信用卡</option>
+                    <option value="CVS_COD">超商取貨付款</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <div class>
+                    付款狀態：
+                    <span v-if="tempOrder.is_paid" class="text-success text-center">已付款</span>
+                    <span v-if="!tempOrder.is_paid" class="text-danger text-center">未付款</span>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class>
+                    付款日期：
+                    <span v-if="tempOrder.is_paid">{{tempOrder.paid_date|FormatTime}}</span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class>訂單總額：{{tempOrder.total}}</div>
+                </div>
+                <form class="col-12 mt-md-2 border-top border-bottom">
+                  <div class="form-row mb-3">
+                    <div class="col-12 h6 my-2">收件人資料</div>
+                    <div class="col-md-6">
+                      <label for="username">收件人姓名</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        name="name"
+                        id="username"
+                        placeholder="輸入姓名"
+                        v-model="tempOrder.user.name"
+                      />
+                      <!-- <span class="text-danger" v-if="errors.has('name')">姓名欄位不得留空</span> -->
+                    </div>
+                    <div class="col-md-6">
+                      <label for="usertel">收件人電話</label>
+                      <input
+                        type="tel"
+                        class="form-control form-control-sm"
+                        id="usertel"
+                        name="tel"
+                        placeholder="請輸入電話"
+                        v-model="tempOrder.user.tel"
+                      />
+                      <!-- <span class="text-danger" v-if="errors.has('tel')">電話欄位不得留空</span> -->
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="useremail">Email</label>
+                    <input
+                      type="email"
+                      class="form-control form-control-sm"
+                      name="email"
+                      id="useremail"
+                      placeholder="請輸入 Email"
+                      v-model="tempOrder.user.email"
+                    />
+                    <!-- <span class="text-danger" v-if="errors.has('email')">{{errors.first('email')}}</span> -->
+                  </div>
+
+                  <div class="form-group">
+                    <label for="useraddress">收件人地址</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      name="address"
+                      id="useraddress"
+                      placeholder="請輸入地址"
+                      v-model="tempOrder.user.address"
+                    />
+                    <!-- <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span> -->
+                  </div>
+
+                  <div class="form-group">
+                    <label for="comment">
+                      客戶留言
+                      <small class="text-muted"></small>
+                    </label>
+                    <textarea
+                      name
+                      id="comment"
+                      class="form-control form-control-sm"
+                      cols="30"
+                      rows="4"
+                      v-model="tempOrder.message"
+                    ></textarea>
+                  </div>
+                </form>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th width="30"></th>
+                      <th>產品名稱</th>
+                      <th width="80">售價</th>
+                      <th width="40">數量</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="item in tempOrder.products" :key="item.id">
+                      <td>
+                        <img :src="item.product.image" alt style="width:30px;height:30px" />
+                      </td>
+                      <td>{{item.product.title}}</td>
+                      <td class="text-right">{{item.product.price|currency}}</td>
+                      <td>
+                        <input type="number" :value="item.qty" style="width:40px" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" @click="updateOrder">
+              <i class="fas fa-spinner fa-spin" v-if="isLoading"></i>
+              儲存變更
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import Pagination from "../DashboardPagination";
+import $ from "jquery";
 export default {
   data() {
     return {
-      orders: [
-        {
-          create_at: 1523539834,
-          id: "-L9u2EUkQSoEmW7QzGLF",
-          is_paid: true,
-          message: "這是留言",
-          paid_date: 1523539924,
-          payment_method: "credit_card",
-          products: [
-            {
-              id: "L8nBrq8Ym4ARI1Kog4t",
-              product_id: "-L8moRfPlDZZ2e-1ritQ",
-              qty: "3"
-            }
-          ],
-          total: 100,
-          user: {
-            address: "kaohsiung",
-            email: "test@gmail.com",
-            name: "test",
-            tel: "0912346768"
-          },
-          num: 1
+      isLoading: false,
+      orders: [],
+      tempOrder: {
+        create_at: "",
+        id: "",
+        is_paid: "",
+        message: "",
+        paid_date: "",
+        payment_method: "",
+        products: [
+          {
+            coupon: {
+              code: "",
+              due_date: "",
+              id: "-",
+              num: "",
+              percent: "",
+              title: ""
+            },
+            final_total: "",
+            id: "-",
+            product: {
+              category: "",
+              id: "-",
+              image: "",
+              origin_price: "",
+              price: "",
+              title: "",
+              unit: ""
+            },
+            product_id: "",
+            qty: "",
+            total: ""
+          }
+        ],
+        total: "",
+        user: {
+          address: "",
+          email: "",
+          name: "",
+          tel: ""
         },
-        {
-          create_at: 1523539519,
-          id: "-L9u11NAE0m0SpSBUDIq",
-          is_paid: false,
-          message: "這是留言",
-          payment_method: "credit_card",
-          products: [
-            {
-              id: "L8nBrq8Ym4ARI1Kog4t",
-              product_id: "-L8moRfPlDZZ2e-1ritQ",
-              qty: "3"
-            }
-          ],
-          user: {
-            address: "kaohsiung",
-            email: "test@gmail.com",
-            name: "test",
-            tel: "0912346768"
-          },
-          num: 2
-        }
-      ]
+        num: ""
+      },
+      pagination: {}
     };
+  },
+  components: {
+    Pagination
+  },
+  methods: {
+    getOrdersData(page = 1) {
+      let vm = this;
+      vm.isLoading = true;
+      let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/orders?page=${page}`;
+      vm.$http.get(api).then(response => {
+        console.log("後台取得訂單資料：", response);
+        vm.orders = response.data.orders;
+        vm.pagination = response.data.pagination;
+        vm.isLoading = false;
+      });
+      //將現有的分頁資料利用props傳到元件中，再利用emit將點擊時觸發的資料回傳到此頁面中，這樣就可以利用資料重新AJAX得到新的一筆分頁資料
+      //函式中先預設變數帶入1
+    },
+    updateOrder() {
+      let vm = this;
+      vm.isLoading = true;
+      let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/order/${vm.tempOrder.id}`;
+      vm.$http.put(api, { data: vm.tempOrder }).then(response => {
+        console.log("更新訂單資料：", response);
+        vm.getOrdersData();
+        $("#OrderModal").modal("hide");
+      });
+    },
+    openModal(item) {
+      this.tempOrder = Object.assign({}, item);
+      $("#OrderModal").modal("show");
+    }
+  },
+  created() {
+    this.getOrdersData();
   }
 };
 </script>
