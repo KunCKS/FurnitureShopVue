@@ -9,6 +9,7 @@ import "vue-loading-overlay/dist/vue-loading.css";
 import "bootstrap";
 import App from "./App";
 import router from "./router";
+import "./bus";
 import CurrencyFilter from "./filters/Currency";
 import CashSignFilter from "./filters/cashSign";
 import FormatTime from "./filters/FormatTime";

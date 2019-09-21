@@ -77,7 +77,7 @@
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class>訂單總額：{{tempOrder.total}}</div>
+                  <div class>訂單總額：{{tempOrder.total}} 元</div>
                 </div>
                 <form class="col-12 mt-md-2 border-top border-bottom">
                   <div class="form-row mb-3">
@@ -155,7 +155,8 @@
                       <th width="30"></th>
                       <th>產品名稱</th>
                       <th width="80">售價</th>
-                      <th width="40">數量</th>
+                      <th width="70">數量</th>
+                      <!-- <th width="40"></th> -->
                     </tr>
                   </thead>
                   <tbody>
@@ -165,9 +166,25 @@
                       </td>
                       <td>{{item.product.title}}</td>
                       <td class="text-right">{{item.product.price|currency}}</td>
-                      <td>
-                        <input type="number" :value="item.qty" style="width:40px" />
-                      </td>
+                      <td>{{item.qty}}/{{item.product.unit}}</td>
+                      <!-- <td>
+                        <div class="btn-group dropright">
+                          <button
+                            type="button"
+                            class="btn btn-outline-danger btn-sm rounded"
+                            data-toggle="dropdown"
+                          >
+                            <i class="fas fa-trash-alt"></i>
+                          </button>
+                          <div class="ml-2 dropdown-menu px-3">
+                            <small class="text-danger">確定要刪除</small>
+                            <button
+                              class="btn btn-danger btn-sm"
+                              @click="delProductInOrder(item.id,item)"
+                            >確定</button>
+                          </div>
+                        </div>
+                      </td>-->
                     </tr>
                   </tbody>
                 </table>
@@ -202,32 +219,7 @@ export default {
         message: "",
         paid_date: "",
         payment_method: "",
-        products: [
-          {
-            coupon: {
-              code: "",
-              due_date: "",
-              id: "-",
-              num: "",
-              percent: "",
-              title: ""
-            },
-            final_total: "",
-            id: "-",
-            product: {
-              category: "",
-              id: "-",
-              image: "",
-              origin_price: "",
-              price: "",
-              title: "",
-              unit: ""
-            },
-            product_id: "",
-            qty: "",
-            total: ""
-          }
-        ],
+        products: {},
         total: "",
         user: {
           address: "",
@@ -244,6 +236,10 @@ export default {
     Pagination
   },
   methods: {
+    del(id) {
+      delete this.test[id];
+      console.log(this.test);
+    },
     getOrdersData(page = 1) {
       let vm = this;
       vm.isLoading = true;
@@ -267,6 +263,19 @@ export default {
         $("#OrderModal").modal("hide");
       });
     },
+    // delProductInOrder(productId, item) {
+    //   let vm = this;
+    //   console.log(vm.tempOrder.products[productId]);
+    //   delete vm.tempOrder.products[productId];
+    //   console.log(vm.tempOrder.products);
+    //   // vm.isLoading = true;
+    //   // let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/order/${vm.tempOrder.id}`;
+    //   // vm.$http.put(api, { data: vm.tempOrder }).then(response => {
+    //   //   console.log("更新訂單資料：", response);
+    //   //   vm.getOrdersData();
+    //   //   $("#OrderModal").modal("hide");
+    //   // });
+    // },
     openModal(item) {
       this.tempOrder = Object.assign({}, item);
       $("#OrderModal").modal("show");

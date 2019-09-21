@@ -56,6 +56,7 @@ export default {
       };
       vm.$http.post(api, data).then(response => {
         console.log("登入訊息：", response.data.message);
+        vm.$bus.$emit("message");
       });
     }
   }

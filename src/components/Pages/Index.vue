@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Alert></Alert>
     <side-bar></side-bar>
     <div class="pl-md-8">
       <div class="container">
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+import Alert from "../Alert";
 import sideBar from "../SideBar";
 import navBar from "../NavBar";
 import footerContent from "../FooterContent";
@@ -21,7 +23,8 @@ export default {
   components: {
     sideBar,
     navBar,
-    footerContent
+    footerContent,
+    Alert
   }
 };
 </script>
