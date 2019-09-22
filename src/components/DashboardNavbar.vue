@@ -24,7 +24,12 @@ export default {
       let vm = this;
       let api = `${process.env.APIPATH}/logout`;
       vm.$http.post(api).then(response => {
-        console.log("登出訊息:", response.data);
+        if (!response.data.success) {
+          console.log("登出訊息:", response.data);
+          vm.$bus.$emit("message:push", response.data.message, "danger");
+        } else {
+          vm.$router.push("/home");
+        }
       });
     }
   }

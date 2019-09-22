@@ -30,13 +30,19 @@
           <router-link class="nav-link" to="products">產品</router-link>
         </li>
         <li class="nav-item mr-2">
-          <router-link class="nav-link" to>尋找靈感</router-link>
-        </li>
-        <li class="nav-item mr-2">
           <router-link class="nav-link" to>優惠訊息</router-link>
         </li>
         <li class="nav-item mr-2">
+          <router-link class="nav-link" to>聯絡我們</router-link>
+        </li>
+        <li class="nav-item mr-2">
           <router-link class="nav-link" to>查詢訂單</router-link>
+        </li>
+        <li class="nav-item mr-2" v-if="isSignedIn">
+          <a href="#" class="nav-link" @click.prevent="signout">會員登出</a>
+        </li>
+        <li class="nav-item mr-2" v-if="!isSignedIn">
+          <router-link class="nav-link" to="login">會員登入</router-link>
         </li>
         <li class="nav-item mr-2">
           <router-link class="nav-link" to="cart">
@@ -55,21 +61,35 @@
 <script>
 import $ from "jquery";
 export default {
+  data() {
+    return {
+      isSignedIn: false
+      //利用eventBus來變換值，作為登入登出的判斷
+    };
+  },
   methods: {
     flyoutShown() {
       $("#menuBtnInNavBar").toggleClass("menuBtn-shown");
       $("#sideNav").toggleClass("shown");
     },
-    toProducts() {
-      this.$router.push("/products");
-    },
-    toHome() {
-      this.$router.push("/");
-    },
-    toCart() {
-      this.$router.push("/cart");
+    signout() {
+      let vm = this;
+      let api = `${process.env.APIPATH}/logout`;
+      vm.$http.post(api).then(response => {
+        vm.$bus.$emit("message:push", response.data.message);
+        vm.isSignedIn = false;
+        vm.$router.push("/home");
+      });
     }
+  },
+  created() {
+    let vm = this;
+    vm.$bus.$on("signIn", () => {
+      vm.isSignedIn = true;
+      //監視signIn事件，用來改變isSignedIn值
+    });
   }
+  //scroll滑動數據
   // created() {
   //   let lastScrollY = 0;
   //   $(window).scroll(() => {

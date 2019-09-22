@@ -25,6 +25,28 @@ Vue.filter("currency", CurrencyFilter);
 Vue.filter("cashSign", CashSignFilter);
 Vue.filter("FormatTime", FormatTime);
 
+//導航守衛
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    let api = `${process.env.APIPATH}/api/user/check`;
+    axios.post(api).then(response => {
+      console.log("檢查用戶是否仍持續登入：", response);
+      if (response.data.success) {
+        next();
+      } else {
+        alert("請重新登入");
+        next({
+          path: "/login"
+        });
+      }
+    });
+    //這邊設定若path的meta帶的requiresAuth變數為true時，則執行api做驗證，若response是true，則調用next()讓其通過到 to，否則就回傳login的path到next()中將route轉到登入頁面。
+  } else {
+    next();
+    //記得這邊要再調用一次next()，否則會守衛會卡住頁面等待你下指令ＱＱ
+  }
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",

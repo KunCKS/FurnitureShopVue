@@ -3,7 +3,7 @@
     <div class="row justify-content-center py-9">
       <div class="col-md-6">
         <form class="form-signin" @submit.prevent="login">
-          <h1 class="h3 mb-3 font-weight-normal text-center">會員登入</h1>
+          <h1 class="h3 mb-3 font-weight-normal text-center">會員(管理員)登入</h1>
           <label for="inputEmail" class="sr-only">Email address</label>
           <input
             type="email"
@@ -55,8 +55,14 @@ export default {
         password: vm.loginData.password
       };
       vm.$http.post(api, data).then(response => {
-        console.log("登入訊息：", response.data.message);
-        vm.$bus.$emit("message");
+        // console.log("登入訊息：", response.data.message);
+        if (response.data.success) {
+          vm.$bus.$emit("signIn");
+          vm.$router.push("/admin");
+        } else {
+          vm.$bus.$emit("message:push", response.data.message, "danger");
+          // console.log("emit danger");
+        }
       });
     }
   }

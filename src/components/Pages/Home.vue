@@ -13,25 +13,26 @@
     >
       <slide>
         <div
-          class="bg-cover"
-          style="background-image:url('https://images.unsplash.com/photo-1519643381401-22c77e60520e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80');height: 80vh"
+          class="bg-cover carousel-img"
+          style="background-image:url('https://images.unsplash.com/photo-1519643381401-22c77e60520e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80');"
         ></div>
       </slide>
       <slide>
         <div
-          class="bg-cover"
-          style="background-image:url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');height: 80vh"
+          class="bg-cover carousel-img"
+          style="background-image:url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');"
         ></div>
       </slide>
       <slide>
         <div
-          class="bg-cover"
-          style="background-image:url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1273&q=80');height: 80vh"
+          class="bg-cover carousel-img"
+          style="background-image:url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1273&q=80');"
         ></div>
       </slide>
     </carousel>
     <introduce-section :contentData="contentDataTop"></introduce-section>
     <introduce-section :contentData="contentDataMid" :flexRowReverse="true"></introduce-section>
+    <img-wall></img-wall>
     <introduce-designer-section :contentData="contentDataBtm"></introduce-designer-section>
     <introduce-company-section></introduce-company-section>
   </div>
@@ -42,6 +43,7 @@ import { Carousel, Slide } from "vue-carousel";
 import IntroduceSection from "../IntroduceSection";
 import IntroduceDesignerSection from "../IntroduceDesignerSection";
 import introduceCompanySection from "../IntroduceCompanySection";
+import imgWall from "../imgWall";
 export default {
   data() {
     return {
@@ -78,7 +80,8 @@ export default {
     Slide,
     IntroduceSection,
     IntroduceDesignerSection,
-    introduceCompanySection
+    introduceCompanySection,
+    imgWall
   }
 };
 </script>

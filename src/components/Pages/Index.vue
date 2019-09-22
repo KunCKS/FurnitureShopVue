@@ -1,5 +1,6 @@
 <template>
   <div>
+    <news-overlay></news-overlay>
     <Alert></Alert>
     <side-bar></side-bar>
     <div class="pl-md-8">
@@ -19,12 +20,19 @@ import Alert from "../Alert";
 import sideBar from "../SideBar";
 import navBar from "../NavBar";
 import footerContent from "../FooterContent";
+import NewsOverlay from "../NewsOverlay";
 export default {
+  // data(){
+  //   return{
+  //     isSignedIn:false,
+  //   }
+  // },
   components: {
     sideBar,
     navBar,
     footerContent,
-    Alert
+    Alert,
+    NewsOverlay
   }
 };
 </script>

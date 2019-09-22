@@ -66,12 +66,12 @@
                 <div class="form-group">
                   <label for="customFile">
                     或 上傳圖片
-                    <i class="fas fa-spinner fa-spin" v-if="isLoading"></i>
+                    <i class="fas fa-spinner fa-spin" v-if="upLoading"></i>
                   </label>
                   <input
                     type="file"
                     id="customFile"
-                    @change="addFileName"
+                    @change="upload"
                     class="form-control"
                     ref="files"
                   />
@@ -233,7 +233,8 @@ export default {
       },
       pagination: {},
       isLoading: false,
-      isNew: false
+      isNew: false,
+      upLoading: false
     };
   },
   components: {
@@ -270,6 +271,36 @@ export default {
       });
       //這邊依照isNew變數來辦判斷要帶入的api及使用的 XHR方法
     },
+    upload() {
+      const vm = this;
+      // console.log(vm.$refs.files.files[0].name);
+      vm.tempProduct.image = vm.$refs.files.files[0].name;
+      const uploadedFile = vm.$refs.files.files[0];
+      vm.upLoading = true;
+      const formData = new FormData();
+      formData.append("file-to-upload", uploadedFile);
+      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/upload`;
+      vm.$http
+        .post(url, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then(response => {
+          // console.log(response.data, response, "上傳");
+          vm.upLoading = false;
+          console.log(response.data, vm.$bus);
+          if (response.data.success) {
+            // vm.tempProduct.imageUrl = response.data.imageUrl;
+            // console.log(vm.tempProduct);
+            vm.$set(vm.tempProduct, "imageUrl", response.data.imageUrl);
+            // console.log(vm.tempProduct);
+            vm.$bus.$emit("message:push", "上傳成功", "success");
+          } else {
+            vm.$bus.$emit("message:push", response.data.message, "danger");
+          }
+        });
+    },
     openModal(isNew, item, isDel) {
       if (isNew) {
         this.tempProduct = {};
@@ -295,16 +326,17 @@ export default {
         vm.isLoading = false;
         $("#delProductModal").modal("hide");
       });
-    },
-    addFileName() {
-      // console.log($("#customFile").val());
-      let fileVal = $("#customFile").val();
-      // console.log(fileVal.lastIndexOf("\\"));
-      let index = fileVal.lastIndexOf("\\");
-      // console.log(fileVal.substring(index + 1));
-      this.tempProduct.image = fileVal.substring(index + 1);
-      //利用change事件來添加檔名到變數中，這邊利用lastIndexOf帶入'\\'找到字串的index，然後利用index帶入substring()來return字串
     }
+    // addFileName() {
+    //   // console.log($("#customFile").val());
+    //   let fileVal = $("#customFile").val();
+    //   // console.log(fileVal.lastIndexOf("\\"));
+    //   let index = fileVal.lastIndexOf("\\");
+    //   // console.log(fileVal.substring(index + 1));
+    //   this.tempProduct.image = fileVal.substring(index + 1);
+    //   //利用change事件來添加檔名到變數中，這邊利用lastIndexOf帶入'\\'找到字串的index，然後利用index帶入substring()來return字串
+    // }
+    //忘記有ref屬性啦！！這邊不使用勒！
   },
   created() {
     this.getProductsData();
