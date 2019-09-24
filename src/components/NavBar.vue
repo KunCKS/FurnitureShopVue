@@ -10,7 +10,7 @@
       <div class="btnBar"></div>
       <div class="btnBar"></div>
     </a>
-    <router-link class="p-0 mx-md-0 mx-auto" to="home">
+    <router-link class="p-0 mx-md-0 mx-auto" to="/home">
       <img src="../assets/ASIN_logo.svg" style="width:80px" alt />
     </router-link>
     <!-- <button
@@ -27,7 +27,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item mr-2">
-          <router-link class="nav-link" to="products">產品</router-link>
+          <router-link class="nav-link" to="/products">產品</router-link>
         </li>
         <li class="nav-item mr-2">
           <router-link class="nav-link" to>優惠訊息</router-link>
@@ -42,10 +42,10 @@
           <a href="#" class="nav-link" @click.prevent="signout">會員登出</a>
         </li>
         <li class="nav-item mr-2" v-if="!isSignedIn">
-          <router-link class="nav-link" to="login">會員登入</router-link>
+          <router-link class="nav-link" to="/login">會員登入</router-link>
         </li>
         <li class="nav-item mr-2">
-          <router-link class="nav-link" to="cart">
+          <router-link class="nav-link" to="/cart">
             <i class="fas fa-shopping-cart"></i>
           </router-link>
         </li>

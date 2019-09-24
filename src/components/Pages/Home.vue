@@ -1,5 +1,6 @@
 <template>
   <div>
+    <news-overlay></news-overlay>
     <h1 class="m-0 text-hide">ASin Design</h1>
     <carousel
       :per-page="1"
@@ -44,6 +45,7 @@ import IntroduceSection from "../IntroduceSection";
 import IntroduceDesignerSection from "../IntroduceDesignerSection";
 import introduceCompanySection from "../IntroduceCompanySection";
 import imgWall from "../imgWall";
+import NewsOverlay from "../NewsOverlay";
 export default {
   data() {
     return {
@@ -81,7 +83,8 @@ export default {
     IntroduceSection,
     IntroduceDesignerSection,
     introduceCompanySection,
-    imgWall
+    imgWall,
+    NewsOverlay
   }
 };
 </script>

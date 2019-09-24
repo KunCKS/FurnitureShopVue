@@ -11,6 +11,9 @@
   background-size: cover;
   background-position: center center;
 }
+.pgHightRevise {
+  min-height: calc(100vh - 83.38px - 205.6px);
+}
 .expandToside {
   top: 0;
   left: 0;
@@ -20,29 +23,25 @@
 .vertical-write {
   writing-mode: vertical-lr;
 }
-input {
-  &::-webkit-input-placeholder {
-    color: theme-color("green-m");
-  }
-}
 .form-control,
 .form-control-lg {
-  background-color: theme-color("green-l");
+  // background-color: theme-color("green-l");
   background-clip: border-box;
 }
 .negative-row-margin {
   margin-left: -15px;
   margin-right: -15px;
 }
-//修正invoice頁面顏色問題
-.invoice {
-  .list-group-item.active {
-    color: theme-color("primary");
-  }
-}
+
 .img-scales {
   transition-duration: 0.5s;
   &:hover {
     transform: scale(1.1);
   }
+}
+.isValid {
+  border-color: #28a745;
+}
+.isInValid {
+  border-color: #dc3545;
 }

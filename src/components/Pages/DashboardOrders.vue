@@ -162,7 +162,7 @@
                   <tbody>
                     <tr v-for="item in tempOrder.products" :key="item.id">
                       <td>
-                        <img :src="item.product.image" alt style="width:30px;height:30px" />
+                        <img :src="item.product.imageUrl" alt style="width:30px;height:30px" />
                       </td>
                       <td>{{item.product.title}}</td>
                       <td class="text-right">{{item.product.price|currency}}</td>

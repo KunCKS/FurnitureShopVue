@@ -12,7 +12,7 @@
     <table class="table">
       <thead class="thead-light">
         <tr>
-          <th scope="col" width="80">分類</th>
+          <th scope="col" width="100">分類</th>
           <th scope="col">產品名稱</th>
           <th scope="col" width="110">原價</th>
           <th scope="col" width="110">售價</th>
@@ -77,6 +77,15 @@
                   />
                 </div>
                 <img :src="tempProduct.imageUrl" class="img-fluid" alt />
+                <div class="form-group mt-2" v-if="tempProduct.image">
+                  <label for="imageName">檔名</label>
+                  <input
+                    class="form-control"
+                    name="imageName"
+                    id="imageName"
+                    v-model="tempProduct.image"
+                  />
+                </div>
               </div>
               <div class="col-sm-8">
                 <div class="form-group">
@@ -173,7 +182,9 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary" @click="update">確認</button>
+            <button type="button" class="btn btn-primary" @click="update">
+              <i class="fas fa-spinner fa-spin" v-if="isLoading"></i>確認
+            </button>
           </div>
         </div>
       </div>

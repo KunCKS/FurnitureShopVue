@@ -47,7 +47,7 @@ export default new Router({
           component: CustomerOrder
         },
         {
-          path: "customercheckout",
+          path: "customercheckout/:id",
           name: "CustomerCheckout",
           component: CustomerCheckout
         },

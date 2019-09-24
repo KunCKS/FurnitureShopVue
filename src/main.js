@@ -4,8 +4,10 @@ import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
 import VeeValidate from "vee-validate";
+import VueI18n from "vue-i18n";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+//此插件還有css檔要匯入！要記得看清楚API！
 import "bootstrap";
 import App from "./App";
 import router from "./router";
@@ -13,17 +15,29 @@ import "./bus";
 import CurrencyFilter from "./filters/Currency";
 import CashSignFilter from "./filters/cashSign";
 import FormatTime from "./filters/FormatTime";
+import zhTW from "vee-validate/dist/locale/zh_TW";
 
 Vue.config.productionTip = false;
 axios.defaults.withCredentials = true;
 //跨域API cookie儲存問題修正
-Vue.use(VeeValidate);
+Vue.use(VueI18n);
 Vue.use(VueAxios, axios);
+// Vue.use(VeeValidate);
 Vue.component("loading", Loading);
-//此插件還有css檔要匯入！要記得看清楚API！
 Vue.filter("currency", CurrencyFilter);
 Vue.filter("cashSign", CashSignFilter);
 Vue.filter("FormatTime", FormatTime);
+
+// vee - validate;
+const i18n = new VueI18n({
+  locale: "zhTW"
+});
+Vue.use(VeeValidate, {
+  i18n,
+  dictionary: {
+    zhTW
+  }
+});
 
 //導航守衛
 router.beforeEach((to, from, next) => {
@@ -49,6 +63,7 @@ router.beforeEach((to, from, next) => {
 
 /* eslint-disable no-new */
 new Vue({
+  // i18n,
   el: "#app",
   router,
   components: { App },

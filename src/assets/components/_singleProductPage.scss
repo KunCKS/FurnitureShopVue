@@ -1,0 +1,19 @@
+.pdPage {
+  .pdPage-imgSection {
+    padding-left: 60px;
+    .pdPage-img {
+      position: relative;
+      width: 100%;
+      &:after {
+        position: absolute;
+        content: "";
+        background-color: #f4f3ee;
+        left: -150px;
+        top: 80px;
+        right: -30px;
+        bottom: -80px;
+        z-index: -2;
+      }
+    }
+  }
+}

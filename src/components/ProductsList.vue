@@ -4,10 +4,21 @@
     <div class="row mx-0 mt-md-2">
       <div class="col-md-6 mb-md-3" v-for="item in productsData" :key="item.id">
         <div class="products-card text-center border border-white shadow">
-          <div
-            class="bg-cover products-card-img"
-            :style="`background-image:url('${item.imageUrl}')`"
-          ></div>
+          <div class="products-card-imgSection">
+            <a
+              href="#"
+              class="products-card-link text-decoration-none"
+              @click.prevent="moreInfo(item.id)"
+            >
+              <div class="products-card-overlay d-flex">
+                <div class="btn btn-outline-secondary btn-sm m-auto">更多細節</div>
+              </div>
+            </a>
+            <div
+              class="bg-cover products-card-img"
+              :style="`background-image:url('${item.imageUrl}')`"
+            ></div>
+          </div>
           <div class="products-card-footer text-muted border-0 row no-gutters">
             <div class="col-md-8 my-auto">
               <div class="pl-3 products-card-title text-left">{{item.category}}</div>
@@ -19,8 +30,10 @@
               >原價 {{item.origin_price|currency|cashSign}}</div>
               <div class="products-card-price text-right pr-3">特價 {{item.price|currency|cashSign}}</div>
             </div>
-            <div class="col-12 p-1 text-right">
-              <button class="btn btn-danger btn-sm">加入購物車</button>
+            <div class="col-12 p-1 d-flex">
+              <button class="btn btn-danger btn-sm ml-auto mr-2" @click="addCart(item.id)">
+                <i class="fas fa-spinner fa-spin" v-if="uploadCart"></i>加入購物車
+              </button>
             </div>
           </div>
         </div>
@@ -40,12 +53,13 @@ export default {
   data() {
     return {
       productsData: [],
-      isLoading: false
+      isLoading: false,
+      uploadCart: false
     };
   },
   methods: {
     getProductList() {
-      let vm = this;
+      const vm = this;
       vm.isLoading = true;
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
       vm.$http.get(api).then(response => {
@@ -54,6 +68,22 @@ export default {
         // vm.pagination = response.data.pagination;
         vm.isLoading = false;
       });
+    },
+    addCart(id, qty = 1) {
+      const vm = this;
+      vm.uploadCart = true;
+      let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      let item = {
+        product_id: id,
+        qty: qty
+      };
+      vm.$http.post(api, { data: item }).then(response => {
+        console.log("加到購物車內：", response);
+        vm.uploadCart = false;
+      });
+    },
+    moreInfo(id) {
+      this.$router.push(`/product/${id}`);
     }
   },
   components: {
@@ -61,6 +91,9 @@ export default {
   },
   created() {
     this.getProductList();
+  },
+  computed: {
+    filterData() {}
   }
 };
 </script>

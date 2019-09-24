@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="min-height:calc(100vh - 83.38px - 205.6px)">
+  <div class="container pgHightRevise">
     <div class="row justify-content-center py-9">
       <div class="col-md-6">
         <form class="form-signin" @submit.prevent="login">

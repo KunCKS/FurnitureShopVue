@@ -1,5 +1,6 @@
 <template>
-  <div class="container pt-md-3 pb-md-5" style="min-height:calc(100vh - 83.38px - 205.6px)">
+  <div class="container pt-md-3 pb-md-5 pgHightRevise">
+    <loading :active.sync="isLoading"></loading>
     <div class="row">
       <div class="col-12">
         <div class="form-row">
@@ -14,18 +15,36 @@
           </div>
         </div>
       </div>
-      <form class="col-md-8 mt-md-3 px-4">
+      <form class="col-md-7 mt-md-3 px-4">
         <div class="form-row mb-3">
           <div class="col-12 h5 mb-3 text-center">訂單資訊</div>
           <div class="col-md-6">
             <label for="username">收件人姓名</label>
-            <input type="text" class="form-control" name="name" id="username" placeholder="輸入姓名" />
-            <!-- <span class="text-danger" v-if="errors.has('name')">姓名欄位不得留空</span> -->
+            <input
+              type="text"
+              class="form-control"
+              :class="{'is-invalid':errors.has('name')}"
+              name="name"
+              id="username"
+              v-validate="'required'"
+              placeholder="輸入姓名"
+              v-model="order.user.name"
+            />
+            <span class="text-danger" v-if="errors.has('name')">姓名欄位不得留空</span>
           </div>
           <div class="col-md-6">
             <label for="usertel">收件人電話</label>
-            <input type="tel" class="form-control" id="usertel" name="tel" placeholder="請輸入電話" />
-            <!-- <span class="text-danger" v-if="errors.has('tel')">電話欄位不得留空</span> -->
+            <input
+              type="tel"
+              class="form-control"
+              :class="{'is-invalid':errors.has('tel')}"
+              id="usertel"
+              name="tel"
+              placeholder="請輸入電話"
+              v-validate="'required'"
+              v-model="order.user.tel"
+            />
+            <span class="text-danger" v-if="errors.has('tel')">電話欄位不得留空</span>
           </div>
         </div>
 
@@ -34,11 +53,14 @@
           <input
             type="email"
             class="form-control"
+            :class="{'is-invalid':errors.has('email')}"
             name="email"
             id="useremail"
+            v-validate="'required|email'"
             placeholder="請輸入 Email"
+            v-model="order.user.email"
           />
-          <!-- <span class="text-danger" v-if="errors.has('email')">{{errors.first('email')}}</span> -->
+          <span class="text-danger" v-if="errors.has('email')">{{errors.first('email')}}</span>
         </div>
 
         <div class="form-group">
@@ -46,11 +68,14 @@
           <input
             type="text"
             class="form-control"
+            :class="{'is-invalid':errors.has('address')}"
             name="address"
             id="useraddress"
+            v-validate="'required'"
             placeholder="請輸入地址"
+            v-model="order.user.address"
           />
-          <!-- <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span> -->
+          <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span>
         </div>
 
         <div class="form-group">
@@ -58,23 +83,107 @@
             備註
             <small class="text-muted">(選填)</small>
           </label>
-          <textarea name id="comment" class="form-control" cols="30" rows="4"></textarea>
-        </div>
-        <div class="text-right">
-          <button class="btn btn-light btn-block">送出訂單</button>
+          <textarea
+            name
+            id="comment"
+            class="form-control"
+            cols="30"
+            rows="4"
+            v-model="order.message"
+          ></textarea>
         </div>
       </form>
-      <div class="col-md-4 border shadow">
+      <div class="col-md-5 border shadow">
         <div class="h5 text-center mt-3">您的訂單</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Morbi leo risus</li>
-          <li class="list-group-item">Porta ac consectetur ac</li>
-          <li class="list-group-item">Vestibulum at eros</li>
-        </ul>
-        <a href="#" class="btn btn-outline-success btn-block mt-4">前往付款</a>
+        <table class="table mt-3">
+          <thead>
+            <tr>
+              <td>商品</td>
+              <td width="100">總計</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in cartData.carts" :key="item.id">
+              <td>{{item.product.title}} Ｘ{{item.qty}}</td>
+              <td class="text-right">{{item.product.price|currency}}</td>
+            </tr>
+          </tbody>
+          <tfoot class="border-top">
+            <tr>
+              <th>總計</th>
+              <td class="text-right">{{cartData.total|currency}}</td>
+            </tr>
+            <tr v-if="cartData.final_total < cartData.total">
+              <th>
+                折扣價
+                <small class="text-success">(已套用coupon優惠)</small>
+              </th>
+              <td class="text-right">{{cartData.final_total|currency}}</td>
+            </tr>
+          </tfoot>
+        </table>
+        <a href="#" class="btn btn-outline-success btn-block mt-4" @click.prevent="createOrder">
+          <i class="fas fa-spinner fa-spin" v-if="uploadCart"></i>送出訂單
+        </a>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+//上面表單使用vee-validate套件來做驗證，errors為套件所提供的變數，其可調用has,first等方法，has內的值指向input的name屬性。
+export default {
+  data() {
+    return {
+      isLoading: false,
+      uploadCart: false,
+      cartData: {},
+      order: {
+        user: {},
+        message: ""
+      }
+    };
+  },
+  methods: {
+    getCartData() {
+      const vm = this;
+      vm.isLoading = true;
+      let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      vm.$http.get(api).then(response => {
+        console.log("取得購物車資料：", response);
+        vm.cartData = response.data.data;
+        vm.isLoading = false;
+      });
+    },
+    createOrder() {
+      const vm = this;
+      vm.uploadCart = true;
+      let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order`;
+      const order = vm.order;
+      this.$validator.validate().then(valid => {
+        if (valid) {
+          vm.$http.post(api, { data: order }).then(response => {
+            console.log("建立訂單：", response);
+            if (response.data.success) {
+              vm.$router.push(`/customercheckout/${response.data.orderId}`);
+              vm.uploadCart = false;
+            } else {
+              vm.uploadCart = false;
+              vm.$bus.$emit(
+                "message:push",
+                "訂單建立失敗，請洽客服人員",
+                "danger"
+              );
+            }
+          });
+        } else {
+          vm.uploadCart = false;
+        }
+      });
+    }
+  },
+  created() {
+    this.getCartData();
+  }
+};
+</script>
