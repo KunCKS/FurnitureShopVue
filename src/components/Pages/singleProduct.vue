@@ -31,9 +31,9 @@
                   <div class="input-group mt-2">
                     <div class="input-group-prepend">
                       <a
+                        href="#"
                         class="btn btn-outline-secondary"
                         :class="{'disabled':qty ===1}"
-                        type="button"
                         id="button-addon1"
                         @click.prevent="qty = qty - 1"
                       >−</a>
@@ -46,9 +46,9 @@
                     />
                     <div class="input-group-append">
                       <a
+                        href="#"
                         class="btn btn-outline-secondary"
                         :class="{'disabled':qty ===99}"
-                        type="button"
                         id="button-addon2"
                         @click.prevent="qty = qty + 1"
                       >+</a>

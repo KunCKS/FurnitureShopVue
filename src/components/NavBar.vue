@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light bg-light home-navbar-zindex" id="header-navbar">
+  <nav class="navbar navbar-expand-md navbar-light bg-light home-navBar-zIndex" id="header-navbar">
     <a
       href="#"
       class="menuBtn position-absolute d-md-none"
@@ -45,8 +45,12 @@
           <router-link class="nav-link" to="/login">會員登入</router-link>
         </li>
         <li class="nav-item mr-2">
-          <router-link class="nav-link" to="/cart">
+          <router-link class="nav-link navBar-cart-icon" to="/cart">
             <i class="fas fa-shopping-cart"></i>
+            <span
+              class="badge badge-danger rounded-circle navBar-cart-totalItems"
+              v-if="cartData.carts"
+            >{{cartData.carts.length}}</span>
           </router-link>
         </li>
       </ul>
@@ -63,8 +67,9 @@ import $ from "jquery";
 export default {
   data() {
     return {
-      isSignedIn: false
+      isSignedIn: false,
       //利用eventBus來變換值，作為登入登出的判斷
+      cartData: []
     };
   },
   methods: {
@@ -80,13 +85,26 @@ export default {
         vm.isSignedIn = false;
         vm.$router.push("/home");
       });
+    },
+    getCartData() {
+      const vm = this;
+      let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      vm.$http.get(api).then(response => {
+        console.log("取得購物車資料：", response);
+        vm.cartData = response.data.data;
+      });
     }
   },
   created() {
-    let vm = this;
+    const vm = this;
+    vm.getCartData();
     vm.$bus.$on("signIn", () => {
       vm.isSignedIn = true;
       //監視signIn事件，用來改變isSignedIn值
+    });
+    vm.$bus.$on("reGetCart", () => {
+      vm.getCartData();
+      //
     });
   }
   //scroll滑動數據

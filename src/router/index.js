@@ -16,6 +16,8 @@ import NoPath from "@/components/Pages/noPath";
 Vue.use(Router);
 
 export default new Router({
+  //主頁在index下，利用children做其他頁面的切換
+  //管理頁面在admin下
   routes: [
     {
       path: "*",
@@ -87,12 +89,12 @@ export default new Router({
           meta: { requiresAuth: true }
         }
       ]
-    },
-    {
-      path: "/nopath",
-      name: "nopath",
-      component: NoPath
     }
+    // {
+    //   path: "/nopath",
+    //   name: "nopath",
+    //   component: NoPath
+    // }
     // {
     //   path: "/orders",
     //   name: "orders",

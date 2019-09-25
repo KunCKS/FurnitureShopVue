@@ -2,6 +2,11 @@
 // .sidebarPadding-revise {
 //   padding-left: $sidebar-revise-width;
 // }
+.menuBtn {
+  left: calc((4.5rem - 24px) / 2);
+  //這邊帶入sidebar寬度及btn寬度來計算左側padding的距離
+  top: 2rem;
+}
 .sideNav {
   .side-bar {
     position: fixed;
@@ -63,6 +68,20 @@
           transform: translateY(0);
         }
       }
+      // .flyout-content-img {
+      //   width: 70%;
+      //   position: relative;
+      //   &:after {
+      //     position: absolute;
+      //     content: "";
+      //     background-color: #e9eaec;
+      //     right: -10px;
+      //     top: 10px;
+      //     bottom: -10px;
+      //     left: 10px;
+      //     z-index: -2;
+      //   }
+      // }
       .flyout-content-footer {
         transition: all 2s ease;
         position: absolute;

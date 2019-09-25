@@ -12,7 +12,8 @@
     <table class="table">
       <thead class="thead-light">
         <tr>
-          <th scope="col" width="100">分類</th>
+          <th scope="col" width="100">系列</th>
+          <th scope="col" width="100">種類</th>
           <th scope="col">產品名稱</th>
           <th scope="col" width="110">原價</th>
           <th scope="col" width="110">售價</th>
@@ -22,6 +23,7 @@
       </thead>
       <tbody>
         <tr v-for="item in products" :key="item.id">
+          <td>{{item.category_series}}</td>
           <td>{{item.category}}</td>
           <td>{{item.title}}</td>
           <td class="text-right">{{item.origin_price|currency}}</td>
@@ -100,17 +102,27 @@
                 </div>
 
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="category">分類</label>
+                  <div class="form-group col-md-4">
+                    <label for="category-series">分類-系列</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="category-series"
+                      v-model="tempProduct.category_series"
+                      placeholder="請輸入分類-系列"
+                    />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="category">分類-類型</label>
                     <input
                       type="text"
                       class="form-control"
                       id="category"
                       v-model="tempProduct.category"
-                      placeholder="請輸入分類"
+                      placeholder="請輸入分類-類型"
                     />
                   </div>
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-4">
                     <label for="price">單位</label>
                     <input
                       type="unit"
@@ -232,7 +244,7 @@ export default {
       products: [],
       tempProduct: {
         // title: "",
-        // category: "",
+        // category:"",
         // origin_price: "",
         // price: "",
         // unit: "",
@@ -276,7 +288,7 @@ export default {
       }
       vm.$http[method](api, { data: vm.tempProduct }).then(response => {
         console.log("建立新產品：", response);
-        this.getProductsData();
+        this.getProductsData(vm.pagination.current_page);
         vm.isLoading = false;
         $("#productModal").modal("hide");
       });

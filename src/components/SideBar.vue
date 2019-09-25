@@ -42,16 +42,16 @@
                 <div class="card-body">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Home</a>
+                      <a class="nav-link" href="#">全系列</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Link</a>
+                      <a class="nav-link" href="#">Ećo系列</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Dropdown</a>
+                      <a class="nav-link" href="#">ḾetälGråy系列</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Disabled</a>
+                      <a class="nav-link" href="#">Ȏlḍ系列</a>
                     </li>
                   </ul>
                 </div>
@@ -66,7 +66,7 @@
                     class="btn btn-link dropdown-toggle"
                     data-toggle="collapse"
                     data-target="#collapseTwo"
-                  >桌子</button>
+                  >椅子</button>
                 </h5>
               </div>
 
@@ -79,16 +79,16 @@
                 <div class="card-body">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Home</a>
+                      <a class="nav-link" href="#">全系列</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Link</a>
+                      <a class="nav-link" href="#">Ećo系列</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Dropdown</a>
+                      <a class="nav-link" href="#">ḾetälGråy系列</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Disabled</a>
+                      <a class="nav-link" href="#">Ȏlḍ系列</a>
                     </li>
                   </ul>
                 </div>
@@ -103,7 +103,7 @@
                     class="btn btn-link dropdown-toggle"
                     data-toggle="collapse"
                     data-target="#collapseThree"
-                  >櫃子</button>
+                  >桌子</button>
                 </h5>
               </div>
 
@@ -111,16 +111,16 @@
                 <div class="card-body">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Home</a>
+                      <a class="nav-link" href="#">全系列</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Link</a>
+                      <a class="nav-link" href="#">Ećo系列</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Dropdown</a>
+                      <a class="nav-link" href="#">ḾetälGråy系列</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Disabled</a>
+                      <a class="nav-link" href="#">Ȏlḍ系列</a>
                     </li>
                   </ul>
                 </div>
@@ -135,7 +135,7 @@
                     class="btn btn-link dropdown-toggle"
                     data-toggle="collapse"
                     data-target="#collapseFour"
-                  >椅子</button>
+                  >收納系列</button>
                 </h5>
               </div>
 
@@ -143,16 +143,16 @@
                 <div class="card-body">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Home</a>
+                      <a class="nav-link" href="#">全系列</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Link</a>
+                      <a class="nav-link" href="#">Ećo系列</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Dropdown</a>
+                      <a class="nav-link" href="#">ḾetälGråy系列</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Disabled</a>
+                      <a class="nav-link" href="#">Ȏlḍ系列</a>
                     </li>
                   </ul>
                 </div>
@@ -160,6 +160,7 @@
             </div>
           </li>
         </ul>
+
         <div class="flyout-content-footer">ASIN DESIGN SENCE 2019</div>
       </div>
     </nav>
@@ -175,13 +176,6 @@ export default {
       $("#sideNav").toggleClass("shown");
     }
   }
+  //點擊替換className達到sidebar動畫效果
 };
 </script>
-
-<style lang="scss" scope>
-.menuBtn {
-  left: calc((4.5rem - 24px) / 2);
-  //這邊帶入sidebar寬度及btn寬度來計算左側padding的距離
-  top: 2rem;
-}
-</style>

@@ -47,11 +47,11 @@
         <div class="h5 text-center border-bottom pb-2">購 物 車 合 計</div>
         <div class="d-flex">
           <h6>總計</h6>
-          <span class="ml-auto">{{cartData.total}}</span>
+          <span class="ml-auto">{{cartData.total|currency}}</span>
         </div>
         <div class="d-flex">
           <h6>折扣價</h6>
-          <span class="ml-auto">{{cartData.total}}</span>
+          <span class="ml-auto">{{cartData.total|currency}}</span>
         </div>
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="couponCode" />
@@ -105,6 +105,7 @@ export default {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${id}`;
       vm.$http.delete(api).then(response => {
         console.log("刪除購物車資料：", response);
+        vm.$bus.$emit("reGetCart");
         vm.getCartData();
       });
     },

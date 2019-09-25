@@ -1,8 +1,21 @@
 $navBar-padding-revise: 1.25rem;
-.home-navbar-zindex {
+.home-navBar-zIndex {
   z-index: 51;
 }
+//navbar與sidebar有重疊得部分，故設定z-index
 .navBar-padding-revise {
   padding-top: $navBar-padding-revise;
   padding-bottom: $navBar-padding-revise;
+}
+.navBar-cart-icon {
+  position: relative;
+  // font-size: 1rem;
+  .navBar-cart-totalItems {
+    position: absolute;
+    top: 10%;
+    // right: 0;
+    // font-size: 0.3rem;
+    // width: 20px;
+    // height: 10px;
+  }
 }
