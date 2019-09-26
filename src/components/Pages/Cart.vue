@@ -41,35 +41,43 @@
             </tr>
           </tbody>
         </table>
-        <div class="text-center" v-if="cartData.carts.length < 1">購物車沒有產品喔！！</div>
+        <div class="text-center py-6" v-if="cartData.carts.length < 1">購物車沒有產品喔！！</div>
       </div>
-      <div class="col-md-4 border p-3">
-        <div class="h5 text-center border-bottom pb-2">購 物 車 合 計</div>
-        <div class="d-flex">
-          <h6>總計</h6>
-          <span class="ml-auto">{{cartData.total|currency}}</span>
-        </div>
-        <div class="d-flex">
-          <h6>折扣價</h6>
-          <span class="ml-auto">{{cartData.total|currency}}</span>
-        </div>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="couponCode" />
-          <div class="input-group-append">
-            <button
-              class="btn btn-outline-primary"
-              type="button"
-              id="button-addon2"
-              @click="useCoupon"
-            >套用優惠碼</button>
+      <div class="col-md-4">
+        <div class="border p-3 shadow">
+          <div class="h5 text-center border-bottom pb-2">購 物 車 合 計</div>
+          <div class="d-flex">
+            <h6>總計</h6>
+            <span class="ml-auto">{{cartData.total|currency}}</span>
           </div>
+          <div class="d-flex">
+            <div class="d-flex" v-if="cartData.final_total < cartData.total">
+              <h6>折扣價</h6>
+              <small class="text-success">(已套用coupon優惠)</small>
+            </div>
+            <span
+              class="ml-auto text-success"
+              v-if="cartData.final_total < cartData.total"
+            >{{cartData.final_total|currency}}</span>
+          </div>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="couponCode" />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="button-addon2"
+                @click="useCoupon"
+              >套用優惠碼</button>
+            </div>
+          </div>
+          <a
+            href="#"
+            class="btn btn-outline-success btn-block"
+            :class="{'disabled':cartData.carts.length < 1}"
+            @click.prevent="toCustomerOrder"
+          >前往結帳</a>
         </div>
-        <a
-          href="#"
-          class="btn btn-outline-success btn-block"
-          :class="{'disabled':cartData.carts.length < 1}"
-          @click.prevent="toCustomerOrder"
-        >前往結帳</a>
       </div>
     </div>
   </div>

@@ -12,7 +12,8 @@ import DashBoardProducts from "@/components/Pages/DashBoardProducts";
 import DashboardOrders from "@/components/Pages/DashboardOrders";
 import Coupons from "@/components/Pages/Coupons";
 import singleProduct from "@/components/Pages/singleProduct";
-import NoPath from "@/components/Pages/noPath";
+import Promotion from "@/components/Pages/Promotion";
+// import NoPath from "@/components/Pages/noPath";
 Vue.use(Router);
 
 export default new Router({
@@ -60,8 +61,13 @@ export default new Router({
         },
         {
           path: "product/:id",
-          name: "product",
+          name: "Product",
           component: singleProduct
+        },
+        {
+          path: "promotion",
+          name: "Promotion",
+          component: Promotion
         }
       ]
     },

@@ -9,21 +9,17 @@
   .news-card {
     position: relative;
     width: 100%;
-    height: 50%;
+    height: 70%;
     background-size: 100% 100%;
     .news-card-img {
       width: 100%;
     }
   }
-  @include media-breakpoint-up(md) {
-    .news-card {
-      width: 50%;
-    }
-  }
-  .news-card-cancel {
+  .news-card-cancelBtn {
     position: absolute;
-    right: -10px;
-    top: -15px;
+    right: 1%;
+    top: -1%;
     font-size: 2rem;
+    // height: 20px;
   }
 }

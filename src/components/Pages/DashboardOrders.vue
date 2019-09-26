@@ -57,7 +57,7 @@
                   <select
                     name="payment_methods"
                     id="payment_methods"
-                    v-model="tempOrder.payment_method"
+                    v-model="tempOrder.user.payment_method"
                   >
                     <option value="credit_card">信用卡</option>
                     <option value="CVS_COD">超商取貨付款</option>

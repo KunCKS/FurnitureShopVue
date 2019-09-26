@@ -10,7 +10,7 @@
       <div class="btnBar"></div>
       <div class="btnBar"></div>
     </a>
-    <router-link class="p-0 mx-md-0 mx-auto" to="/home">
+    <router-link class="p-0 mx-md-0 ml-6" to="/home">
       <img src="../assets/ASIN_logo.svg" style="width:80px" alt />
     </router-link>
     <!-- <button
@@ -30,10 +30,10 @@
           <router-link class="nav-link" to="/products">產品</router-link>
         </li>
         <li class="nav-item mr-2">
-          <router-link class="nav-link" to>優惠訊息</router-link>
+          <router-link class="nav-link" to="/promotion">最新消息</router-link>
         </li>
         <li class="nav-item mr-2">
-          <router-link class="nav-link" to>聯絡我們</router-link>
+          <router-link class="nav-link" to="/promotion#contact">聯絡我們</router-link>
         </li>
         <li class="nav-item mr-2">
           <router-link class="nav-link" to>查詢訂單</router-link>
@@ -59,6 +59,13 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>-->
     </div>
+    <router-link class="navBar-cart-icon-collapse mr-2" to="/cart">
+      <i class="fas fa-shopping-cart"></i>
+      <span
+        class="badge badge-danger rounded-circle navBar-cart-totalItems"
+        v-if="cartData.carts"
+      >{{cartData.carts.length}}</span>
+    </router-link>
   </nav>
 </template>
 

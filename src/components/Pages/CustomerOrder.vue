@@ -93,7 +93,7 @@
           ></textarea>
         </div>
       </form>
-      <div class="col-md-5 border shadow">
+      <div class="col-md-5 border shadow d-flex flex-column">
         <div class="h5 text-center mt-3">您的訂單</div>
         <table class="table mt-3">
           <thead>
@@ -122,9 +122,40 @@
             </tr>
           </tfoot>
         </table>
-        <a href="#" class="btn btn-outline-success btn-block mt-4" @click.prevent="createOrder">
-          <i class="fas fa-spinner fa-spin" v-if="uploadCart"></i>送出訂單
-        </a>
+        <div class="order-submit-section p-2 mt-auto">
+          <div class="d-flex">
+            <strong class>配送方式</strong>
+            <div class="ml-auto">
+              <div class="form-check ml-auto">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="payment"
+                  id="CVS_COD"
+                  value="CVS_COD"
+                  v-model="order.user.payment_method"
+                  checked
+                />
+                <label class="form-check-label mr-3" for="CVS_COD">超商付款</label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="payment"
+                  id="credit_card"
+                  value="credit_card"
+                  v-model="order.user.payment_method"
+                />
+                <label class="form-check-label" for="credit_card">信用卡付款</label>
+              </div>
+            </div>
+          </div>
+
+          <a href="#" class="btn btn-outline-success btn-block mt-4" @click.prevent="createOrder">
+            <i class="fas fa-spinner fa-spin" v-if="uploadCart"></i>送出訂單
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -165,6 +196,7 @@ export default {
           vm.$http.post(api, { data: order }).then(response => {
             console.log("建立訂單：", response);
             if (response.data.success) {
+              vm.$bus.$emit("reGetCart");
               vm.$router.push(`/customercheckout/${response.data.orderId}`);
               vm.uploadCart = false;
             } else {

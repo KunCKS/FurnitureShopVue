@@ -19,3 +19,16 @@ $navBar-padding-revise: 1.25rem;
     // height: 10px;
   }
 }
+.navBar-cart-icon-collapse {
+  display: block;
+  position: relative;
+  .navBar-cart-totalItems {
+    position: absolute;
+    top: 10%;
+  }
+}
+@include media-breakpoint-up(md) {
+  .navBar-cart-icon-collapse {
+    display: none;
+  }
+}

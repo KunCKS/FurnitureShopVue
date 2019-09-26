@@ -1,20 +1,49 @@
 <template>
-  <div class="news-overlay d-none justify-content-center align-items-center" id="news-overlay">
-    <div class="news-card">
-      <img :src="`${imgUrl}`" alt class="news-card-img rounded" />
-      <button class="btn news-card-cancel" @click="delOverlay">
-        <span aria-hidden="true" class="text-white">&times;</span>
-      </button>
+  <div
+    class="news-overlay d-none justify-content-center align-items-center align-items-center"
+    id="news-overlay"
+  >
+    <div class="news-card d-flex justify-content-center align-items-center">
+      <!-- <img :src="`${imgUrl}`" alt class="news-card-img rounded" /> -->
+      <div class="coupon-wrapper rounded" :style="`background-image:url(${imgUrl})`">
+        <div
+          class="coupon-card p-3 bg-white d-flex flex-column justify-content-center text-center shadow"
+        >
+          <div class="counpon-subtitle-top Ubuntu">LIMITED TIME ONLY</div>
+          <div
+            class="counpon-title h2 Volkhov m-0 d-flex justify-content-center align-items-center"
+          >
+            50
+            <span>
+              <div class="unit Volkhov">%</div>
+              <div class="unit Volkhov">OFF</div>
+            </span>
+          </div>
+          <div class="Volkhov counpon-subtitle-bottom m-sm-0 my-2">Opening Promotion</div>
+          <div class="Ubuntu mt-sm-4">WITH THE CODE</div>
+          <div class="Ubuntu">OPEN50OFF</div>
+          <div class="row justify-content-center">
+            <div class="col-md-5">
+              <button
+                class="btn btn-sm btn-outline-primary mt-sm-4 mt-2"
+                type="button"
+                @click="delOverlay"
+              >SHOP NOW</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import couponImg from "@/assets/Coupon50.jpg";
+// import couponImg from "@/assets/COUPON票券_2.png";
 import $ from "jquery";
 export default {
   data() {
     return {
-      imgUrl: couponImg
+      imgUrl:
+        "https://images.unsplash.com/photo-1493552152660-f915ab47ae9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
     };
   },
   methods: {
