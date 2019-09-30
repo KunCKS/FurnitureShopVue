@@ -26,6 +26,7 @@ export default new Router({
     },
     {
       path: "/",
+      redirect: "/home",
       name: "index",
       component: Index,
       children: [
@@ -37,6 +38,11 @@ export default new Router({
         {
           path: "products",
           name: "Products",
+          component: Products
+        },
+        {
+          path: "products/:category/:series",
+          name: "FilterProducts",
           component: Products
         },
         {

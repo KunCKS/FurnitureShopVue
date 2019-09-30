@@ -10,7 +10,7 @@
                 class="btn btn-link dropdown-toggle"
                 data-toggle="collapse"
                 data-target="#ProductsCollapseOne"
-              >沙發</button>
+              >沙發 SOFAS</button>
             </h5>
           </div>
           <div id="ProductsCollapseOne" class="collapse" data-parent="#accordionProducts">
@@ -42,7 +42,7 @@
                 class="btn btn-link dropdown-toggle"
                 data-toggle="collapse"
                 data-target="#ProductsCollapseTwo"
-              >椅子</button>
+              >椅子 CHAIRS</button>
             </h5>
           </div>
           <div
@@ -79,7 +79,7 @@
                 class="btn btn-link dropdown-toggle"
                 data-toggle="collapse"
                 data-target="#ProductsCollapseThree"
-              >桌子</button>
+              >桌子 TABLES</button>
             </h5>
           </div>
           <div id="ProductsCollapseThree" class="collapse" data-parent="#accordionProducts">
@@ -111,7 +111,7 @@
                 class="btn btn-link dropdown-toggle"
                 data-toggle="collapse"
                 data-target="#ProductsCollapseFour"
-              >收納系列</button>
+              >收納系列 STORAGE</button>
             </h5>
           </div>
           <div id="ProductsCollapseFour" class="collapse" data-parent="#accordionProducts">

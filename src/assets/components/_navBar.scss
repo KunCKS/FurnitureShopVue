@@ -1,6 +1,40 @@
 $navBar-padding-revise: 1.25rem;
-.home-navBar-zIndex {
+.home-navBar {
   z-index: 51;
+  .nav-link::after {
+    display: none;
+  }
+  .dropdown-menu {
+    left: -94px;
+    width: 260px;
+    border-color: #e9eaec;
+    &:before {
+      position: absolute;
+      content: "";
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent transparent #e9eaec transparent;
+      z-index: 1001;
+    }
+    &:after {
+      position: absolute;
+      content: "";
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent transparent #ffffff transparent;
+      z-index: 1001;
+    }
+  }
 }
 //navbar與sidebar有重疊得部分，故設定z-index
 .navBar-padding-revise {

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light bg-light home-navBar-zIndex" id="header-navbar">
+  <nav class="navbar navbar-expand-md navbar-light bg-light home-navBar" id="header-navbar">
     <a
       href="#"
       class="menuBtn position-absolute d-md-none"
@@ -13,21 +13,10 @@
     <router-link class="p-0 mx-md-0 ml-6" to="/home">
       <img src="../assets/ASIN_logo.svg" style="width:80px" alt />
     </router-link>
-    <!-- <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item mr-2">
-          <router-link class="nav-link" to="/products">產品</router-link>
+          <router-link class="nav-link" to="/products">商品</router-link>
         </li>
         <li class="nav-item mr-2">
           <router-link class="nav-link" to="/promotion">最新消息</router-link>
@@ -35,8 +24,21 @@
         <li class="nav-item mr-2">
           <router-link class="nav-link" to="/promotion#contact">聯絡我們</router-link>
         </li>
-        <li class="nav-item mr-2">
-          <router-link class="nav-link" to>查詢訂單</router-link>
+        <li class="nav-item dropdown mr-2">
+          <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown">查詢訂單</a>
+          <div class="dropdown-menu px-2">
+            <div class="input-group input-group-sm">
+              <input type="text" class="form-control border" placeholder="訂單編號" v-model="order_id" />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="button-addon2"
+                  @click.prevent="toOrder"
+                >送出</button>
+              </div>
+            </div>
+          </div>
         </li>
         <li class="nav-item mr-2" v-if="isSignedIn">
           <a href="#" class="nav-link" @click.prevent="signout">會員登出</a>
@@ -54,10 +56,6 @@
           </router-link>
         </li>
       </ul>
-      <!-- <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>-->
     </div>
     <router-link class="navBar-cart-icon-collapse mr-2" to="/cart">
       <i class="fas fa-shopping-cart"></i>
@@ -76,7 +74,8 @@ export default {
     return {
       isSignedIn: false,
       //利用eventBus來變換值，作為登入登出的判斷
-      cartData: []
+      cartData: [],
+      order_id: ""
     };
   },
   methods: {
@@ -100,6 +99,10 @@ export default {
         console.log("取得購物車資料：", response);
         vm.cartData = response.data.data;
       });
+    },
+    toOrder() {
+      this.$router.push(`customercheckout/${this.order_id}`);
+      this.order_id = "";
     }
   },
   created() {
@@ -114,7 +117,7 @@ export default {
       //
     });
   }
-  //scroll滑動數據
+  // scroll滑動數據
   // created() {
   //   let lastScrollY = 0;
   //   $(window).scroll(() => {

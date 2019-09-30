@@ -29,7 +29,7 @@
                     class="btn btn-link dropdown-toggle"
                     data-toggle="collapse"
                     data-target="#collapseOne"
-                  >沙發</button>
+                  >沙發 SOFAS</button>
                 </h5>
               </div>
 
@@ -41,17 +41,13 @@
               >
                 <div class="card-body">
                   <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">全系列</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Ećo系列</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">ḾetälGråy系列</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Ȏlḍ系列</a>
+                    <li
+                      class="nav-item"
+                      v-for="item in seriesList"
+                      :key="item"
+                      @click="flyoutShown"
+                    >
+                      <router-link class="nav-link" :to="`/products/沙發/${item}`">{{item}} 系列</router-link>
                     </li>
                   </ul>
                 </div>
@@ -66,7 +62,7 @@
                     class="btn btn-link dropdown-toggle"
                     data-toggle="collapse"
                     data-target="#collapseTwo"
-                  >椅子</button>
+                  >椅子 CHAIRS</button>
                 </h5>
               </div>
 
@@ -78,17 +74,13 @@
               >
                 <div class="card-body">
                   <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">全系列</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Ećo系列</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">ḾetälGråy系列</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Ȏlḍ系列</a>
+                    <li
+                      class="nav-item"
+                      v-for="item in seriesList"
+                      :key="item"
+                      @click="flyoutShown"
+                    >
+                      <router-link class="nav-link" :to="`/products/椅子/${item}`">{{item}} 系列</router-link>
                     </li>
                   </ul>
                 </div>
@@ -103,24 +95,20 @@
                     class="btn btn-link dropdown-toggle"
                     data-toggle="collapse"
                     data-target="#collapseThree"
-                  >桌子</button>
+                  >桌子 TABLES</button>
                 </h5>
               </div>
 
               <div id="collapseThree" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">全系列</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Ećo系列</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">ḾetälGråy系列</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Ȏlḍ系列</a>
+                    <li
+                      class="nav-item"
+                      v-for="item in seriesList"
+                      :key="item"
+                      @click="flyoutShown"
+                    >
+                      <router-link class="nav-link" :to="`/products/桌子/${item}`">{{item}} 系列</router-link>
                     </li>
                   </ul>
                 </div>
@@ -135,24 +123,20 @@
                     class="btn btn-link dropdown-toggle"
                     data-toggle="collapse"
                     data-target="#collapseFour"
-                  >收納系列</button>
+                  >收納系列 STORAGE</button>
                 </h5>
               </div>
 
               <div id="collapseFour" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">全系列</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Ećo系列</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">ḾetälGråy系列</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Ȏlḍ系列</a>
+                    <li
+                      class="nav-item"
+                      v-for="item in seriesList"
+                      :key="item"
+                      @click="flyoutShown"
+                    >
+                      <router-link class="nav-link" :to="`/products/收納系列/${item}`">{{item}} 系列</router-link>
                     </li>
                   </ul>
                 </div>
@@ -170,12 +154,37 @@
 <script>
 import $ from "jquery";
 export default {
+  data() {
+    return {
+      seriesList: []
+    };
+  },
   methods: {
     flyoutShown() {
       $("#menuBtn").toggleClass("menuBtn-shown");
       $("#sideNav").toggleClass("shown");
+      $("#menuBtnInNavBar").toggleClass("menuBtn-shown");
+      //點擊替換className達到sidebar動畫效果
+    },
+    getProductData() {
+      const vm = this;
+      let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
+      vm.$http.get(api).then(response => {
+        console.log("產品頁面取得資料：", response);
+        vm.seriesList = response.data.products
+          .map(item => {
+            return item.category_series;
+          })
+          .filter((item, index, arr) => {
+            return arr.indexOf(item) === index;
+          });
+        vm.seriesList.unshift("全系列");
+        //相關內容說明可以看productList.vue
+      });
     }
+  },
+  created() {
+    this.getProductData();
   }
-  //點擊替換className達到sidebar動畫效果
 };
 </script>

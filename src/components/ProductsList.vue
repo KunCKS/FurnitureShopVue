@@ -1,9 +1,11 @@
 <template>
   <div class="row no-gutters">
     <loading :active.sync="isLoading"></loading>
+    <!-- 商品sidebar -->
     <div class="col-md-2">
       <div class="p-2 sticky-top products-side-bar">
         <div class="products-side-bar-title text-center mt-md-2 border-bottom">產品列表</div>
+        <!-- <div>{{filterTarget.series}}{{filterTarget.category}}</div> -->
         <ul class="navbar-nav mt-md-2 pl-2" id="accordionProducts">
           <li class="nav-item">
             <div class="card border-0">
@@ -13,18 +15,14 @@
                     class="btn btn-link dropdown-toggle"
                     data-toggle="collapse"
                     data-target="#ProductsCollapseOne"
-                  >沙發</button>
+                  >沙發 SOFAS</button>
                 </h5>
               </div>
               <div id="ProductsCollapseOne" class="collapse" data-parent="#accordionProducts">
                 <div class="card-body">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item" v-for="item in seriesList" :key="item">
-                      <a
-                        class="nav-link"
-                        href="#"
-                        @click.prevent="filterTarget ={series:item ,category: '沙發'}"
-                      >{{item}} 系列</a>
+                      <router-link class="nav-link" :to="`/products/沙發/${item}`">{{item}} 系列</router-link>
                     </li>
                   </ul>
                 </div>
@@ -40,7 +38,7 @@
                     class="btn btn-link dropdown-toggle"
                     data-toggle="collapse"
                     data-target="#ProductsCollapseTwo"
-                  >椅子</button>
+                  >椅子 CHAIRS</button>
                 </h5>
               </div>
               <div
@@ -53,11 +51,7 @@
                   <ul class="navbar-nav mr-auto">
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item" v-for="(item,index) in seriesList" :key="index">
-                        <a
-                          class="nav-link"
-                          href="#"
-                          @click.prevent="filterTarget ={series:item ,category: '椅子'}"
-                        >{{item}} 系列</a>
+                        <router-link class="nav-link" :to="`/products/椅子/${item}`">{{item}} 系列</router-link>
                       </li>
                     </ul>
                   </ul>
@@ -74,7 +68,7 @@
                     class="btn btn-link dropdown-toggle"
                     data-toggle="collapse"
                     data-target="#ProductsCollapseThree"
-                  >桌子</button>
+                  >桌子 DESKS</button>
                 </h5>
               </div>
               <div id="ProductsCollapseThree" class="collapse" data-parent="#accordionProducts">
@@ -82,11 +76,7 @@
                   <ul class="navbar-nav mr-auto">
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item" v-for="(item,index) in seriesList" :key="index">
-                        <a
-                          class="nav-link"
-                          href="#"
-                          @click.prevent="filterTarget ={series:item ,category: '桌子'}"
-                        >{{item}} 系列</a>
+                        <router-link class="nav-link" :to="`/products/桌子/${item}`">{{item}} 系列</router-link>
                       </li>
                     </ul>
                   </ul>
@@ -103,7 +93,7 @@
                     class="btn btn-link dropdown-toggle"
                     data-toggle="collapse"
                     data-target="#ProductsCollapseFour"
-                  >收納系列</button>
+                  >收納系列 STORAGE</button>
                 </h5>
               </div>
               <div id="ProductsCollapseFour" class="collapse" data-parent="#accordionProducts">
@@ -111,11 +101,7 @@
                   <ul class="navbar-nav mr-auto">
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item" v-for="(item,index) in seriesList" :key="index">
-                        <a
-                          class="nav-link"
-                          href="#"
-                          @click.prevent="filterTarget ={series:item ,category: '收納系列'}"
-                        >{{item}} 系列</a>
+                        <router-link class="nav-link" :to="`/products/收納系列/${item}`">{{item}} 系列</router-link>
                       </li>
                     </ul>
                   </ul>
@@ -126,6 +112,7 @@
         </ul>
       </div>
     </div>
+    <!-- 商品列表 -->
     <div class="col-md-10">
       <div class="text-center py-6" v-if="filterData.length == 0">此系列產品，設計師還在努力創作中！</div>
       <div class="row mx-0 mt-md-2">
@@ -158,15 +145,19 @@
                 <div class="products-card-price text-right pr-3">特價 {{item.price|currency|cashSign}}</div>
               </div>
               <div class="col-12 p-1 d-flex">
-                <button class="btn btn-danger btn-sm ml-auto mr-2" @click="addCart(item.id)">
-                  <i class="fas fa-spinner fa-spin" v-if="uploadCart"></i>加入購物車
+                <button class="btn btn-primary btn-sm ml-auto mr-2" @click="addCart(item.id)">
+                  <i class="fas fa-spinner fa-spin" v-if="product_id === item.id"></i> 加入購物車
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- <pagination></pagination> -->
+      <pagination
+        v-if="$route.fullPath === '/products/' | $route.fullPath === '/products'"
+        :pagination="pagination"
+        @gopage="getPagination"
+      ></pagination>
       <div class="row py-md-8 py-2 no-gutters">
         <div class="col-11 border-top mx-auto d-md-block d-none"></div>
       </div>
@@ -178,13 +169,16 @@
 //上面模板包含了sidebar及產品list，相關CSS樣式寫在productsSideBar.scss及productsCard.scss
 //
 import Pagination from "./Pagination";
+import $ from "jquery";
 export default {
   // props: ["productsData"],
   data() {
     return {
       productsData: [],
+      pageProducts: [],
+      pagination: {},
       isLoading: false, //AJAX作業時loading過場動畫
-      uploadCart: false, //作為商品加入購物車時的過場動圖
+      product_id: "", //作為商品加入購物車時的過場動圖條件
       filterTarget: {
         series: "",
         category: ""
@@ -221,10 +215,29 @@ export default {
         vm.isLoading = false;
       });
     },
+    getPagination(page = 1) {
+      const vm = this;
+      vm.isLoading = true;
+      let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products?page=${page}`;
+      vm.$http.get(api).then(response => {
+        console.log("取得pagination資料：", response);
+        vm.pageProducts = response.data.products;
+        vm.pagination = response.data.pagination;
+        // vm.categoryList = response.data.products
+        //   .map(item => {
+        //     return item.category;
+        //   })
+        //   .filter((item, index, arr) => {
+        //     return arr.indexOf(item) === index;
+        //   });
+        // vm.pagination = response.data.pagination;
+        vm.isLoading = false;
+      });
+    },
     addCart(id, qty = 1) {
       const vm = this;
-      vm.uploadCart = true;
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      vm.product_id = id;
       let item = {
         product_id: id,
         qty: qty
@@ -232,48 +245,58 @@ export default {
       vm.$http.post(api, { data: item }).then(response => {
         console.log("加到購物車內：", response);
         if (response.data.success) {
-          vm.uploadCart = false;
+          vm.product_id = "";
           vm.$bus.$emit("message:push", response.data.message, "success");
           vm.$bus.$emit("reGetCart");
         } else {
-          vm.uploadCart = false;
+          vm.product_id = "";
           vm.$bus.$emit("message:push", response.data.message, "danger");
         }
       });
     },
     moreInfo(id) {
       this.$router.push(`/product/${id}`);
+      $(window).scrollTop(0);
     }
-    // product-card上更多細節的route
+    // product-card上進入單一商品頁面的route
   },
   components: {
     Pagination
   },
   created() {
-    const vm = this;
-    vm.getProductData();
+    this.getProductData();
+    this.getPagination();
   },
   computed: {
     filterData() {
       const vm = this;
-      if (vm.filterTarget.category === "") {
-        return vm.productsData;
+      if (
+        (vm.$route.fullPath === "/products/") |
+        (vm.$route.fullPath === "/products")
+      ) {
+        return vm.pageProducts; //當在 products route時，則以10筆資料為一頁的方式呈現
       } else {
         const filteredData = vm.productsData.filter((item, index, arr) => {
-          return item.category === vm.filterTarget.category;
+          return item.category === vm.$route.params.category;
         });
         if (
-          (vm.filterTarget.series === "全系列") |
-          (vm.filterTarget.series === "")
+          (vm.$route.params.series === "全系列") |
+          (vm.$route.params.series === "")
         ) {
           return filteredData;
         } else {
           const Data = filteredData.filter((item, index, arr) => {
-            return item.category_series === vm.filterTarget.series;
+            return item.category_series === vm.$route.params.series;
           });
           return Data;
         }
       }
+      //記錄一下修正過程
+      //原本過濾data是利用 product sidebar點擊時將不同的category及series值帶到data中的變數filterTarget來進行過濾
+      //但這樣要利用外外層(隔了一層)的抽屜式sidebar來點擊進行頁面移動及data傳入非常麻煩
+      //原本嘗試event bus的方式，但在兩route的hook中會導致無法擷取到資料
+      //想破頭想不到解決方式
+      //後來觀察到電商網頁在切換不同產品時期route會改變，才豁然開朗也可以利用route來傳遞要filter的target
     }
   }
 };

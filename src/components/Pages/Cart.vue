@@ -19,7 +19,8 @@
                   class="btn btn-outline-danger btn-sm border-0"
                   @click="removeCartItem(item.id)"
                 >
-                  <i class="far fa-trash-alt"></i>
+                  <i class="far fa-trash-alt" v-if="currentProductId !== item.id"></i>
+                  <i class="fas fa-spinner fa-spin" v-if="currentProductId === item.id"></i>
                 </button>
               </td>
               <td>
@@ -61,7 +62,13 @@
             >{{cartData.final_total|currency}}</span>
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="couponCode" />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="請輸入優惠碼"
+              v-model="couponCode"
+              @keyup.enter="useCoupon"
+            />
             <div class="input-group-append">
               <button
                 class="btn btn-outline-primary"
@@ -93,23 +100,22 @@ export default {
         }
       },
       isLoading: false,
-      couponCode: ""
+      couponCode: "",
+      currentProductId: ""
     };
   },
   methods: {
     getCartData() {
       const vm = this;
-      vm.isLoading = true;
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
       vm.$http.get(api).then(response => {
         console.log("取得購物車資料：", response);
         vm.cartData = response.data.data;
-        vm.isLoading = false;
       });
     },
     removeCartItem(id) {
       const vm = this;
-      vm.isLoading = true;
+      vm.currentProductId = id;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${id}`;
       vm.$http.delete(api).then(response => {
         console.log("刪除購物車資料：", response);

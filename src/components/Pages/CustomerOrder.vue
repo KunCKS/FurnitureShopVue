@@ -135,6 +135,7 @@
                   value="CVS_COD"
                   v-model="order.user.payment_method"
                   checked
+                  required
                 />
                 <label class="form-check-label mr-3" for="CVS_COD">超商付款</label>
               </div>

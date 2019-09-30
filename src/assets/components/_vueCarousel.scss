@@ -1,8 +1,43 @@
-.carousel-img {
-  height: 50vh;
+.scrollDownIcon {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #ffffff;
+  z-index: 1000;
+  width: 50px;
+  @include media-breakpoint-up(md) {
+    display: block;
+  }
+  .icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    line-height: 2rem;
+  }
 }
-@include media-breakpoint-up(md) {
-  .carousel-img {
-    height: 70vh;
+.carousel-img {
+  background-position: center 80%;
+  background-size: cover;
+}
+.slide-title {
+  vertical-align: bottom;
+  color: #ffffff;
+  height: 300px;
+  @include media-breakpoint-up(md) {
+    height: 90vh;
+  }
+  // padding: 100px;
+  p {
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+    font-size: 2rem;
+    @include media-breakpoint-up(md) {
+      font-size: 95px;
+    }
+    line-height: 1.2em;
   }
 }

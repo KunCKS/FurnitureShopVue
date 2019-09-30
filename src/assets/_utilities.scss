@@ -1,3 +1,7 @@
+// .wrapper {
+//   padding-left: 4.5rem;
+//   padding-top: 99.38px; // NavBar的高度
+// }
 .logo-icon {
   width: 40px;
 }
@@ -50,4 +54,18 @@
 }
 .isInValid {
   border-color: #dc3545;
+}
+@keyframes fadeOut {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.fadeOut {
+  animation: fadeOut 1s;
+  animation-iteration-count: 1;
 }

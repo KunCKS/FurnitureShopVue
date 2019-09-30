@@ -90,9 +90,14 @@ export default {
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order/${id}`;
       vm.$http.get(api).then(response => {
         console.log("取得訂單資料：", response);
-        vm.orderData = response.data.order;
-        vm.isPaid = response.data.order.is_paid;
-        vm.isLoading = false;
+        if (response.data.order == null) {
+          vm.$bus.$emit("message:push", "查無此訂單", "warning");
+          vm.$router.push("/home");
+        } else {
+          vm.orderData = response.data.order;
+          vm.isPaid = response.data.order.is_paid;
+          vm.isLoading = false;
+        }
       });
     },
     checkout() {
