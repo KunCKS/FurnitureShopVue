@@ -69,3 +69,16 @@
   animation: fadeOut 1s;
   animation-iteration-count: 1;
 }
+
+.bg-fixed {
+  display: none;
+  @include media-breakpoint-up(md) {
+    display: block;
+  }
+  background-size: cover;
+  background-position: center 70%;
+  background-attachment: fixed;
+}
+.reverse {
+  transform: scaleX(-1);
+}

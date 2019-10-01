@@ -1,24 +1,25 @@
+.big-title {
+  .name {
+    font-size: 1.25rem;
+    @include media-breakpoint-up(md) {
+      font-size: 1.75rem;
+    }
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .eng {
+    font-size: 1.5rem;
+    @include media-breakpoint-up(md) {
+      font-size: 2rem;
+    }
+    font-weight: 500;
+    line-height: 1.2;
+  }
+}
 .home-products {
   padding: 6rem 0;
-  .big-title {
-    .name {
-      font-size: 1.25rem;
-      @include media-breakpoint-up(md) {
-        font-size: 1.75rem;
-      }
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-      line-height: 1.2;
-    }
-    .eng {
-      font-size: 1.5rem;
-      @include media-breakpoint-up(md) {
-        font-size: 2rem;
-      }
-      font-weight: 500;
-      line-height: 1.2;
-    }
-  }
+
   .items {
     &.negative-margin {
       margin-top: 0;

@@ -28,7 +28,7 @@
                 style="background-image:url('https://images.unsplash.com/photo-1563710852660-8790e6d856ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80')"
               ></div>
               <span class="text">
-                <div class="eng">Chair</div>
+                <div class="eng">Chairs</div>
                 <h3>– 椅子</h3>
               </span>
             </router-link>
@@ -42,7 +42,7 @@
                 style="background-image:url('https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80')"
               ></div>
               <span class="text">
-                <div class="eng">Desk</div>
+                <div class="eng">Tables</div>
                 <h3>– 桌子</h3>
               </span>
             </router-link>
@@ -69,7 +69,7 @@
 <script>
 import $ from "jquery";
 export default {
-  created() {
+  mounted() {
     $(window).scroll(function() {
       let titlePOS = $(".home-products .big-title").offset().top;
       let windowHeight = $(window).height();

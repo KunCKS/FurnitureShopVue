@@ -48,7 +48,7 @@
         </li>
         <li class="nav-item mr-2">
           <router-link class="nav-link navBar-cart-icon" to="/cart">
-            <i class="fas fa-shopping-cart"></i>
+            <i class="fas fa-shopping-bag"></i>
             <span
               class="badge badge-danger rounded-circle navBar-cart-totalItems"
               v-if="cartData.carts"
@@ -58,7 +58,7 @@
       </ul>
     </div>
     <router-link class="navBar-cart-icon-collapse mr-2" to="/cart">
-      <i class="fas fa-shopping-cart"></i>
+      <i class="fas fa-shopping-bag"></i>
       <span
         class="badge badge-danger rounded-circle navBar-cart-totalItems"
         v-if="cartData.carts"

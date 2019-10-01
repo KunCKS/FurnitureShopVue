@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <div class="row no-gutters">
       <div
         class="col-3 img-wall border border-secondary"

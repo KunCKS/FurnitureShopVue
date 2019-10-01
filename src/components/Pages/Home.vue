@@ -31,10 +31,81 @@
       </carousel>
     </div>
     <home-products></home-products>
-    <introduce-section :contentData="contentDataTop"></introduce-section>
-    <introduce-section :contentData="contentDataMid" :flexRowReverse="true"></introduce-section>
+    <!-- <introduce-section :contentData="contentDataTop"></introduce-section> -->
+    <div
+      class="bg-fixed"
+      style="background-image:url('https://images.unsplash.com/photo-1503174971373-b1f69850bded?ixlib=rb-1.2.1&auto=format&fit=crop&w=1387&q=80');height:400px"
+    ></div>
+    <div class="container-fluid py-4">
+      <div class="row style-intro">
+        <div class="col-md-6 col-12">
+          <div
+            class="intro-content big-title text-center text-primary h-100 d-flex flex-column justify-content-center"
+          >
+            <h3 class="name mb-0">
+              <span class="border border-top-0 border-bottom-0 px-3">Ećo Style</span>
+            </h3>
+            <small class="text-muted">ASin Design</small>
+            <p
+              class="content mt-md-6 mt-3"
+            >設計師 Ećo 著眼于自然形態、簡潔線條和舒適性，使用大量的淺色元素，流暢的曲線，營造了悠閒氣氛，並為空間注入一股活潑的氣息，打造出無論從哪個角度看都美貌不減，而且無比舒適的傢俱。</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-12">
+          <div class="img-section">
+            <div
+              class="img-back mx-auto"
+              style="background-image:url('https://images.unsplash.com/photo-1517705008128-361805f42e86?ixlib=rb-1.2.1&auto=format&fit=crop&w=1279&q=80')"
+            >
+              <div class="title right text-white">Ećo</div>
+              <div
+                class="img-front right"
+                style="background-image:url('https://images.unsplash.com/photo-1517705008128-361805f42e86?ixlib=rb-1.2.1&auto=format&fit=crop&w=1279&q=80')"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid py-4">
+      <div class="row style-intro flex-md-row-reverse">
+        <div class="col-md-6 col-12">
+          <div
+            class="intro-content big-title text-center text-primary h-100 d-flex flex-column justify-content-center"
+          >
+            <h3 class="name mb-0">
+              <span class="border border-top-0 border-bottom-0 px-3">Ȏlḍ Style</span>
+            </h3>
+            <small class="text-muted">ASin Design</small>
+            <p
+              class="content mt-md-6 mt-3"
+            >設計師 Ȏlḍ 著眼于自然形態、復古風味和舒適性，使用大量的褐色元素，流暢的曲線，營造了悠閒氣氛，並為空間注入一股溫暖的氣息，打造出無論從哪個角度看都美貌不減，而且無比舒適的傢俱。</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-12">
+          <div class="img-section">
+            <div
+              class="img-back mx-auto"
+              style="background-image:url('https://images.unsplash.com/photo-1551887196-72e32bfc7bf3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1228&q=80')"
+            >
+              <div class="title left text-white">Ȏlḍ</div>
+              <div
+                class="img-front left"
+                style="background-image:url('https://images.unsplash.com/photo-1551887196-72e32bfc7bf3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1228&q=80')"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <introduce-section :contentData="contentDataMid" :flexRowReverse="true"></introduce-section> -->
     <img-wall></img-wall>
     <div class="container-fluid my-4">
+      <div class="big-title py-3">
+        <h2 class="name text-primary mb-0">認識我們的設計師</h2>
+        <div class="eng">Our Designers</div>
+      </div>
+
       <div class="row">
         <div class="col-md-6 col-12">
           <div class="card-designer px-lg-5 px-md-4">
@@ -73,7 +144,7 @@
               <div class="content">
                 <span
                   class="px-3"
-                >設計師 Ećo 著眼于自然形態、簡潔線條和舒適性，流暢的曲線，營造了悠閒氣氛，並為空間注入一股活潑的氣息，打造出無論從哪個角度看都美貌不減，而且無比舒適的傢俱。</span>
+                >設計師 Ȏlḍ 著眼于自然形態、復古風味和舒適性，使用大量的褐色元素，流暢的曲線，營造了悠閒氣氛，並為空間注入一股溫暖的氣息，打造出無論從哪個角度看都美貌不減，而且無比舒適的傢俱。</span>
               </div>
             </div>
           </div>
