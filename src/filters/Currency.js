@@ -8,3 +8,4 @@ export default function(num) {
     return currency;
   })}`;
 }
+//將數字格式化為3位一個逗點並補上錢字號

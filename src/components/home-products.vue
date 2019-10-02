@@ -70,11 +70,20 @@
 import $ from "jquery";
 export default {
   mounted() {
+    const vm = this;
+    //在頁面生成時監視畫面滾動的位置來進行DOM的動態樣式載入
     $(window).scroll(function() {
-      let titlePOS = $(".home-products .big-title").offset().top;
-      let windowHeight = $(window).height();
-      let scollTop = $(window).scrollTop();
+      // console.log(vm.$route);
+      if (vm.$route.fullPath !== "/home") {
+        $(window).unbind("scroll");
+        //如果頁面不在home時，則不再進行scroll監視，否則會報錯。
+        return; //return 退出函式，否則下面語法一樣會執行一次而報錯。
+      }
+      let titlePOS = $(".home-products .big-title").offset().top; //取得元素位置
+      let windowHeight = $(window).height(); //取得視窗高度
+      let scollTop = $(window).scrollTop(); //取得目前距離最頂端多遠
       if (scollTop >= titlePOS - windowHeight / 2) {
+        //當元素到達視窗高度一半時及動態加入ClassName
         $(".home-products .text").addClass("shown");
       }
     });

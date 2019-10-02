@@ -49,7 +49,12 @@
       line-height: 1.2;
     }
   }
+  //下面語法讓產出的相關商品不換行而變成一長列，但這邊設置了overflow: hidden來遮蔽超出父元素範圍的商品
+  //後續再利用改變元素位置即可製造移動到下一列商品的效果
+  //位移數據綁定在DOM的style屬性上
   .similar-products-content {
+    overflow: hidden !important;
+    flex-wrap: nowrap !important;
     .similar-products {
       // left: -100%;
       transition: left 0.7s;

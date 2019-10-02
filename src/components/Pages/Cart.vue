@@ -1,39 +1,44 @@
 <template>
   <div class="container pt-md-3 pb-md-5 pgHightRevise">
-    <loading :active.sync="isLoading"></loading>
+    <loading :active.sync="status.isLoading"></loading>
     <div class="row">
+      <!--    左側購物清單    -->
       <div class="col-md-8">
         <div class="h4 text-center">購 物 車 清 單</div>
-        <table class="table">
+        <table class="table" v-if="cartData.carts.length >= 1">
           <thead>
             <th width="30"></th>
-            <th colspan="2" width="42">品名</th>
-            <th width="70" class="text-center">數量</th>
+            <th colspan="2">品名</th>
+            <th width="75" class="text-center">數量</th>
             <th width="90">單價</th>
           </thead>
           <tbody>
-            <tr v-for="item in cartData.carts" :key="item.id">
+            <tr v-for="(item,index) in cartData.carts" :key="item.id">
               <td class="align-middle">
                 <button
+                  :id="`cart-del-${index}`"
                   type="button"
                   class="btn btn-outline-danger btn-sm border-0"
-                  @click="removeCartItem(item.id)"
+                  @click="removeCartItem(item.id,index)"
                 >
-                  <i class="far fa-trash-alt" v-if="currentProductId !== item.id"></i>
-                  <i class="fas fa-spinner fa-spin" v-if="currentProductId === item.id"></i>
+                  <i class="far fa-trash-alt" v-if="status.currentProductId !== item.id"></i>
+                  <i class="fas fa-spinner fa-spin" v-if="status.currentProductId === item.id"></i>
                 </button>
               </td>
-              <td>
+              <td width="42" class="align-middle">
                 <div
                   class="bg-cover"
                   :style="`background-image:url('${item.product.imageUrl}');width: 42px;height:42px`"
                 ></div>
               </td>
-              <td>
-                <div class="text-muted">{{item.product.category}} {{item.product.title}}</div>
+              <td class="align-middle">
+                <div class="text-muted">
+                  <span class="d-md-inline-block d-none">{{item.product.category_series}}</span>
+                  {{item.product.title}}
+                </div>
               </td>
               <td class="align-middle text-center">
-                <div class>{{item.qty}}</div>
+                <div class>{{item.qty}}/{{item.product.unit}}</div>
               </td>
               <td class="align-middle text-right">
                 <span class="text-success">{{item.product.price|currency}}</span>
@@ -42,14 +47,18 @@
             </tr>
           </tbody>
         </table>
-        <div class="text-center py-6" v-if="cartData.carts.length < 1">購物車沒有產品喔！！</div>
+        <div class="py-6 text-center border-top border-bottom" v-if="cartData.carts.length < 1">
+          <div class="h5">購物車沒有商品喔！</div>
+          <router-link class="btn btn-primary mt-3" to="/products">繼續購物</router-link>
+        </div>
       </div>
-      <div class="col-md-4">
+      <!--    右側購物小計    -->
+      <div class="col-md-4 mt-md-0 mt-2">
         <div class="border p-3 shadow">
           <div class="h5 text-center border-bottom pb-2">購 物 車 合 計</div>
           <div class="d-flex">
             <h6>總計</h6>
-            <span class="ml-auto">{{cartData.total|currency}}</span>
+            <span class="ml-auto" v-if="cartData.total">{{cartData.total|currency}}</span>
           </div>
           <div class="d-flex">
             <div class="d-flex" v-if="cartData.final_total < cartData.total">
@@ -77,13 +86,16 @@
                 @click="useCoupon"
               >套用優惠碼</button>
             </div>
+            <small
+              class="ml-auto text-success py-1"
+              v-if="cartData.final_total >= cartData.total"
+            >現在輸入OPEN50OFF即可享有折扣價喔!</small>
           </div>
-          <a
-            href="#"
+          <router-link
             class="btn btn-outline-success btn-block"
             :class="{'disabled':cartData.carts.length < 1}"
-            @click.prevent="toCustomerOrder"
-          >前往結帳</a>
+            to="/CustomerOrder"
+          >前往結帳</router-link>
         </div>
       </div>
     </div>
@@ -91,61 +103,67 @@
 </template>
 
 <script>
+import $ from "jquery";
 export default {
   data() {
     return {
+      //取得的購物車資料
       cartData: {
         carts: {
           0: { product: { imageUrl: "" } }
         }
       },
-      isLoading: false,
-      couponCode: "",
-      currentProductId: ""
+      status: { isLoading: false, currentProductId: "" },
+      couponCode: "" //綁定使用者輸入的coupon
     };
   },
   methods: {
+    //取得購物車資料
     getCartData() {
       const vm = this;
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
       vm.$http.get(api).then(response => {
-        console.log("取得購物車資料：", response);
+        // console.log("取得購物車資料：", response);
         vm.cartData = response.data.data;
       });
     },
-    removeCartItem(id) {
+    //刪除購物車中的資料
+    removeCartItem(id, index) {
       const vm = this;
-      vm.currentProductId = id;
+      $(`#cart-del-${index}`).attr("disabled", true);
+      vm.status.currentProductId = id;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${id}`;
       vm.$http.delete(api).then(response => {
-        console.log("刪除購物車資料：", response);
+        // console.log("刪除購物車資料：", response);
         vm.$bus.$emit("reGetCart");
         vm.getCartData();
       });
     },
+    //使用coupon折扣
     useCoupon() {
       const vm = this;
-      vm.isLoading = true;
+      vm.status.isLoading = true;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/coupon`;
       const code = { code: vm.couponCode };
       vm.$http.post(api, { data: code }).then(response => {
-        console.log("套用Coupon：", response);
+        // console.log("套用Coupon：", response);
         if (response.data.success) {
           vm.cartData.final_total = response.data.data.final_total;
           vm.$bus.$emit("message:push", response.data.message, "success");
-          vm.isLoading = false;
+          vm.status.isLoading = false;
         } else {
           vm.$bus.$emit("message:push", response.data.message, "danger");
-          vm.isLoading = false;
+          vm.status.isLoading = false;
         }
       });
-    },
-    toCustomerOrder() {
-      this.$router.push("/CustomerOrder");
     }
   },
   created() {
     this.getCartData();
+    //更新購物車資料
+    this.$bus.$on("reGetCart", () => {
+      this.getCartData();
+    });
   }
 };
 </script>

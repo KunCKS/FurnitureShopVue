@@ -1,7 +1,3 @@
-// .wrapper {
-//   padding-left: 4.5rem;
-//   padding-top: 99.38px; // NavBar的高度
-// }
 .logo-icon {
   width: 40px;
 }
@@ -30,24 +26,13 @@
   bottom: 0;
   right: 0;
 }
-.vertical-write {
-  writing-mode: vertical-lr;
-}
 .form-control,
 .form-control-lg {
-  // background-color: theme-color("green-l");
   background-clip: border-box;
 }
 .negative-row-margin {
   margin-left: -15px;
   margin-right: -15px;
-}
-
-.img-scales {
-  transition-duration: 0.5s;
-  &:hover {
-    transform: scale(1.1);
-  }
 }
 .isValid {
   border-color: #28a745;
@@ -79,6 +64,15 @@
   background-position: center 70%;
   background-attachment: fixed;
 }
-.reverse {
-  transform: scaleX(-1);
+.h7 {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.h8 {
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
 }

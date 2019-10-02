@@ -1,29 +1,29 @@
 <template>
   <div class="container" style="min-height:calc(100vh - 83.38px - 205.6px - 24px)">
-    <loading :active.sync="isLoading"></loading>
+    <loading :active.sync="status.isLoading"></loading>
     <div class="row justify-content-center my-4">
       <div class="col-12">
         <div class="form-row">
           <div class="col-12 col-sm">
-            <div class="alert alert-light text-center alert-rounded" role="alert">1.輸入訂單資料</div>
+            <div class="alert border-primary text-center alert-rounded" role="alert">1.輸入訂單資料</div>
           </div>
           <div class="col-12 col-sm">
             <div
               class="alert text-center alert-rounded"
-              :class="{'alert-primary':!isPaid,'alert-light':isPaid}"
+              :class="{'alert-primary':!status.isPaid,'border-primary':status.isPaid}"
               role="alert"
             >2.金流付款</div>
           </div>
           <div class="col-12 col-sm">
             <div
               class="alert text-center alert-rounded"
-              :class="{'alert-primary':isPaid,'alert-light':!isPaid}"
+              :class="{'alert-primary':status.isPaid,'border-primary':!status.isPaid}"
               role="alert"
             >3.完成</div>
           </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 mt-md-4">
         <div class="row border p-4 shadow justify-content-center">
           <div class="col-12">
             <table class="table">
@@ -33,7 +33,11 @@
                   <td class="border-0">{{orderData.create_at|FormatTime}}</td>
                 </tr>
                 <tr>
-                  <th width="120">Email</th>
+                  <th>訂單編號</th>
+                  <td>{{orderData.id}}</td>
+                </tr>
+                <tr>
+                  <th>Email</th>
                   <td>{{orderData.user.email}}</td>
                 </tr>
                 <tr>
@@ -55,14 +59,14 @@
                 <tr>
                   <th>付款狀態</th>
                   <td>
-                    <span v-if="!isPaid">尚未付款</span>
-                    <span class="text-success" v-if="isPaid">付款完成</span>
+                    <span v-if="!status.isPaid">尚未付款</span>
+                    <span class="text-success" v-if="status.isPaid">付款完成</span>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div class="col-md-5" v-if="!isPaid">
+          <div class="col-md-5" v-if="!status.isPaid">
             <div class="text-right">
               <button class="btn btn-danger btn-block" @click="checkout">確認付款去</button>
             </div>
@@ -74,44 +78,50 @@
 </template>
 
 <script>
+import $ from "jquery";
 export default {
   data() {
     return {
       orderData: { user: { email: "" } },
-      isLoading: false,
-      isPaid: false
+      status: {
+        isLoading: false,
+        isPaid: false //作為是否已付款的條件變數
+      }
     };
   },
   methods: {
+    //取得訂單資料
     getOrderData() {
       const vm = this;
-      vm.isLoading = true;
-      const id = vm.$route.params.id;
+      vm.status.isLoading = true;
+      const id = vm.$route.params.id; //利用route提供要帶入api的值
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order/${id}`;
       vm.$http.get(api).then(response => {
-        console.log("取得訂單資料：", response);
+        // console.log("取得訂單資料：", response);
         if (response.data.order == null) {
           vm.$bus.$emit("message:push", "查無此訂單", "warning");
           vm.$router.push("/home");
         } else {
           vm.orderData = response.data.order;
-          vm.isPaid = response.data.order.is_paid;
-          vm.isLoading = false;
+          vm.status.isPaid = response.data.order.is_paid;
+          vm.status.isLoading = false;
         }
       });
     },
-    checkout() {
+    //確定付款功能
+    checkout(e) {
       const vm = this;
-      vm.isLoading = true;
+      vm.status.isLoading = true;
+      $(e.target).addClass("disabled");
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/pay/${vm.orderData.id}`;
       vm.$http.post(api).then(response => {
-        console.log("結帳付款：", response);
+        // console.log("結帳付款：", response);
         if (response.data.success) {
-          vm.isPaid = true;
-          vm.isLoading = false;
+          vm.status.isPaid = true;
+          vm.status.isLoading = false;
         } else {
           vm.$bus.$emit("message:push", "付款失敗", "danger");
-          vm.isLoading = false;
+          vm.status.isLoading = false;
         }
       });
     }

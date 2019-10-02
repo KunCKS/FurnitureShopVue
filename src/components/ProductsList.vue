@@ -1,28 +1,33 @@
 <template>
   <div class="row no-gutters">
-    <loading :active.sync="isLoading"></loading>
+    <loading :active.sync="status.isLoading"></loading>
     <!-- 商品sidebar -->
     <div class="col-md-2">
       <div class="p-2 sticky-top products-side-bar">
-        <div class="products-side-bar-title text-center mt-md-2 border-bottom">產品列表</div>
-        <!-- <div>{{filterTarget.series}}{{filterTarget.category}}</div> -->
-        <ul class="navbar-nav mt-md-2 pl-2" id="accordionProducts">
-          <li class="nav-item">
+        <div class="px-3 py-4 border-top h6 mb-0">商品列表</div>
+        <ul class="navbar-nav" id="accordionProducts">
+          <li class="nav-item border-top py-2">
             <div class="card border-0">
               <div class="card-header p-0 border-0 bg-white" id="productsHeadingOne">
                 <h5 class="mb-0">
                   <button
-                    class="btn btn-link dropdown-toggle"
+                    class="btn btn-link dropdown-toggle h7 mb-0 pl-md-3 pr-md-1"
                     data-toggle="collapse"
                     data-target="#ProductsCollapseOne"
-                  >沙發 SOFAS</button>
+                  >
+                    沙發
+                    <span class="h8">SOFAS</span>
+                  </button>
                 </h5>
               </div>
               <div id="ProductsCollapseOne" class="collapse" data-parent="#accordionProducts">
-                <div class="card-body">
+                <div class="card-body py-2">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item" v-for="item in seriesList" :key="item">
-                      <router-link class="nav-link" :to="`/products/沙發/${item}`">{{item}} 系列</router-link>
+                      <router-link
+                        class="nav-link h7 font-weight-normal mb-0"
+                        :to="`/products/沙發/${item}`"
+                      >{{item}} 系列</router-link>
                     </li>
                   </ul>
                 </div>
@@ -30,15 +35,18 @@
             </div>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item border-top py-2">
             <div class="card border-0">
               <div class="card-header p-0 border-0 bg-white" id="productsHeadingTwo">
                 <h5 class="mb-0">
                   <button
-                    class="btn btn-link dropdown-toggle"
+                    class="btn btn-link dropdown-toggle h7 mb-0 pl-md-3 pr-md-1"
                     data-toggle="collapse"
                     data-target="#ProductsCollapseTwo"
-                  >椅子 CHAIRS</button>
+                  >
+                    椅子
+                    <span class="h8">CHAIRS</span>
+                  </button>
                 </h5>
               </div>
               <div
@@ -47,63 +55,72 @@
                 aria-labelledby="headingOne"
                 data-parent="#accordionProducts"
               >
-                <div class="card-body">
+                <div class="card-body py-2">
                   <ul class="navbar-nav mr-auto">
-                    <ul class="navbar-nav mr-auto">
-                      <li class="nav-item" v-for="(item,index) in seriesList" :key="index">
-                        <router-link class="nav-link" :to="`/products/椅子/${item}`">{{item}} 系列</router-link>
-                      </li>
-                    </ul>
+                    <li class="nav-item" v-for="(item,index) in seriesList" :key="index">
+                      <router-link
+                        class="nav-link h7 font-weight-normal mb-0"
+                        :to="`/products/椅子/${item}`"
+                      >{{item}} 系列</router-link>
+                    </li>
                   </ul>
                 </div>
               </div>
             </div>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item border-top py-2">
             <div class="card border-0">
               <div class="card-header p-0 border-0 bg-white" id="productsHeadingThree">
                 <h5 class="mb-0">
                   <button
-                    class="btn btn-link dropdown-toggle"
+                    class="btn btn-link dropdown-toggle h7 mb-0 pl-md-3 pr-md-1"
                     data-toggle="collapse"
                     data-target="#ProductsCollapseThree"
-                  >桌子 DESKS</button>
+                  >
+                    桌子
+                    <span class="h8">TABLES</span>
+                  </button>
                 </h5>
               </div>
               <div id="ProductsCollapseThree" class="collapse" data-parent="#accordionProducts">
-                <div class="card-body">
+                <div class="card-body py-2">
                   <ul class="navbar-nav mr-auto">
-                    <ul class="navbar-nav mr-auto">
-                      <li class="nav-item" v-for="(item,index) in seriesList" :key="index">
-                        <router-link class="nav-link" :to="`/products/桌子/${item}`">{{item}} 系列</router-link>
-                      </li>
-                    </ul>
+                    <li class="nav-item" v-for="(item,index) in seriesList" :key="index">
+                      <router-link
+                        class="nav-link h7 font-weight-normal mb-0"
+                        :to="`/products/桌子/${item}`"
+                      >{{item}} 系列</router-link>
+                    </li>
                   </ul>
                 </div>
               </div>
             </div>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item border-top border-bottom py-2">
             <div class="card border-0">
               <div class="card-header p-0 border-0 bg-white" id="productsHeadingFour">
                 <h5 class="mb-0">
                   <button
-                    class="btn btn-link dropdown-toggle"
+                    class="btn btn-link dropdown-toggle h7 mb-0 pl-md-3 pr-md-1"
                     data-toggle="collapse"
                     data-target="#ProductsCollapseFour"
-                  >收納系列 STORAGE</button>
+                  >
+                    收納系列
+                    <span class="h8">STORAGE</span>
+                  </button>
                 </h5>
               </div>
               <div id="ProductsCollapseFour" class="collapse" data-parent="#accordionProducts">
-                <div class="card-body">
+                <div class="card-body py-2">
                   <ul class="navbar-nav mr-auto">
-                    <ul class="navbar-nav mr-auto">
-                      <li class="nav-item" v-for="(item,index) in seriesList" :key="index">
-                        <router-link class="nav-link" :to="`/products/收納系列/${item}`">{{item}} 系列</router-link>
-                      </li>
-                    </ul>
+                    <li class="nav-item" v-for="(item,index) in seriesList" :key="index">
+                      <router-link
+                        class="nav-link h7 font-weight-normal mb-0"
+                        :to="`/products/收納系列/${item}`"
+                      >{{item}} 系列</router-link>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -116,7 +133,7 @@
     <div class="col-md-10">
       <div class="text-center py-6" v-if="filterData.length == 0">此系列產品，設計師還在努力創作中！</div>
       <div class="row mx-0 mt-md-2">
-        <div class="col-md-6 mb-md-3" v-for="item in filterData" :key="item.id">
+        <div class="col-md-6 mb-md-3 mt-md-0 mt-2" v-for="item in filterData" :key="item.id">
           <div class="products-card text-center border border-white shadow">
             <div class="products-card-imgSection">
               <a
@@ -133,20 +150,21 @@
                 :style="`background-image:url('${item.imageUrl}')`"
               ></div>
             </div>
-            <div class="products-card-footer text-muted border-0 row no-gutters">
-              <div class="col-md-8 my-auto">
-                <div class="pl-3 products-card-title text-left">{{item.category_series}}</div>
-                <div class="pl-3 products-card-title text-left text-muted">{{item.title}}</div>
+            <div class="products-card-footer text-muted border-0 p-3 row no-gutters">
+              <div class="col-8 my-auto">
+                <div class="products-card-title text-left">{{item.category_series}}</div>
+                <div class="products-card-title text-left text-muted">{{item.title}}</div>
               </div>
-              <div class="col-md-4 py-3">
-                <div
-                  class="products-card-originPrice text-right pr-3"
-                >原價 {{item.origin_price|currency|cashSign}}</div>
-                <div class="products-card-price text-right pr-3">特價 {{item.price|currency|cashSign}}</div>
+              <div class="col-4">
+                <div class="products-card-originPrice text-right">
+                  原價
+                  <strike>{{item.origin_price|currency}}</strike>
+                </div>
+                <div class="products-card-price text-right">特價 {{item.price|currency}}</div>
               </div>
-              <div class="col-12 p-1 d-flex">
-                <button class="btn btn-primary btn-sm ml-auto mr-2" @click="addCart(item.id)">
-                  <i class="fas fa-spinner fa-spin" v-if="product_id === item.id"></i> 加入購物車
+              <div class="col-12 d-flex mt-2">
+                <button class="btn btn-primary btn-sm ml-auto" @click="addCart(item.id)">
+                  <i class="fas fa-spinner fa-spin" v-if="status.product_id === item.id"></i> 加入購物車
                 </button>
               </div>
             </div>
@@ -167,33 +185,36 @@
 
 <script>
 //上面模板包含了sidebar及產品list，相關CSS樣式寫在productsSideBar.scss及productsCard.scss
-//
+//自訂元件
 import Pagination from "./Pagination";
+//外部插件
 import $ from "jquery";
 export default {
-  // props: ["productsData"],
   data() {
     return {
-      productsData: [],
-      pageProducts: [],
-      pagination: {},
-      isLoading: false, //AJAX作業時loading過場動畫
-      product_id: "", //作為商品加入購物車時的過場動圖條件
-      filterTarget: {
-        series: "",
-        category: ""
-      }, //filter target
+      productsData: [], //商品資料
+      pageProducts: [], //分頁商品資料
+      pagination: {}, //分頁頁碼資料
+      status: {
+        isLoading: false, //AJAX作業時loading過場動畫
+        product_id: "" //作為商品加入購物車時的過場動圖條件
+      },
       seriesList: [] //利用function過濾出來的產品系列
-      // categoryList: []
+
+      // filterTarget: {   //原本作為過濾data的變數，不使用了，詳細說明到最下方看。
+      //   series: "",
+      //   category: ""
+      // },
     };
   },
   methods: {
+    //取得商品資料
     getProductData() {
       const vm = this;
-      vm.isLoading = true;
+      vm.status.isLoading = true;
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
       vm.$http.get(api).then(response => {
-        console.log("產品頁面取得資料：", response);
+        // console.log("產品頁面取得資料：", response);
         vm.productsData = response.data.products;
         vm.seriesList = response.data.products
           .map(item => {
@@ -202,63 +223,50 @@ export default {
           .filter((item, index, arr) => {
             return arr.indexOf(item) === index;
           });
-        //關於seriesList過濾，indexOf若直接item.category_series並與filter(item, index, arr)中arr每項資料做比對是會沒有結果的，所以要利用map()將要過濾的資料先建立為新的陣列，再做filter()
-        vm.seriesList.unshift("全系列"); //在陣列最前方加入新的data
-        // vm.categoryList = response.data.products
-        //   .map(item => {
-        //     return item.category;
-        //   })
-        //   .filter((item, index, arr) => {
-        //     return arr.indexOf(item) === index;
-        //   });
-        // vm.pagination = response.data.pagination;
-        vm.isLoading = false;
+        //關於seriesList過濾，indexOf若直接item.category_series並與filter(item, index, arr)中arr每項資料做比對是會沒有結果的，
+        //所以要利用map()將要過濾的資料先建立為新的陣列，再做filter()
+        vm.seriesList.unshift("所有"); //在陣列最前面加入新的data
+        vm.status.isLoading = false;
       });
     },
+    //取得分頁資料
     getPagination(page = 1) {
       const vm = this;
-      vm.isLoading = true;
+      vm.status.isLoading = true;
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products?page=${page}`;
       vm.$http.get(api).then(response => {
-        console.log("取得pagination資料：", response);
+        // console.log("取得pagination資料：", response);
         vm.pageProducts = response.data.products;
         vm.pagination = response.data.pagination;
-        // vm.categoryList = response.data.products
-        //   .map(item => {
-        //     return item.category;
-        //   })
-        //   .filter((item, index, arr) => {
-        //     return arr.indexOf(item) === index;
-        //   });
-        // vm.pagination = response.data.pagination;
-        vm.isLoading = false;
+        vm.status.isLoading = false;
       });
     },
+    //添加商品到購物車
     addCart(id, qty = 1) {
       const vm = this;
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-      vm.product_id = id;
+      vm.status.product_id = id; //將當前id添加到product_id變數中作為動態icon的開關條件
       let item = {
         product_id: id,
         qty: qty
       };
       vm.$http.post(api, { data: item }).then(response => {
-        console.log("加到購物車內：", response);
+        // console.log("加到購物車內：", response);
         if (response.data.success) {
-          vm.product_id = "";
-          vm.$bus.$emit("message:push", response.data.message, "success");
-          vm.$bus.$emit("reGetCart");
+          vm.status.product_id = ""; //將product_id 值去除，作為動態icon的開關條件
+          vm.$bus.$emit("message:push", response.data.message, "success"); // 觸發事件使頁面回應動作後的訊息，可參考bus.js
+          vm.$bus.$emit("reGetCart"); //觸發重新讀取購物車資料的事件，可參考bus.js
         } else {
-          vm.product_id = "";
+          vm.status.product_id = "";
           vm.$bus.$emit("message:push", response.data.message, "danger");
         }
       });
     },
+    //將商品頁面導至單一商品頁面
     moreInfo(id) {
       this.$router.push(`/product/${id}`);
       $(window).scrollTop(0);
     }
-    // product-card上進入單一商品頁面的route
   },
   components: {
     Pagination
@@ -268,24 +276,29 @@ export default {
     this.getPagination();
   },
   computed: {
+    //商品頁面資料呈現的過濾機制
     filterData() {
       const vm = this;
       if (
         (vm.$route.fullPath === "/products/") |
         (vm.$route.fullPath === "/products")
       ) {
-        return vm.pageProducts; //當在 products route時，則以10筆資料為一頁的方式呈現
+        return vm.pageProducts; //當在 products route時，則以10筆資料為一頁的方式呈現（AJAX取得得分頁資料）
       } else {
-        const filteredData = vm.productsData.filter((item, index, arr) => {
+        //以下做法是利用$route.params來改變過濾的條件，因此各個route-link只要帶入到需要的route就可進行資料的過濾。
+        //這邊先過濾category再進行series的過濾
+        const filteredData = vm.productsData.filter(item => {
           return item.category === vm.$route.params.category;
         });
+        //ex:沙發的所有系列
         if (
-          (vm.$route.params.series === "全系列") |
+          (vm.$route.params.series === "所有") |
           (vm.$route.params.series === "")
         ) {
           return filteredData;
         } else {
-          const Data = filteredData.filter((item, index, arr) => {
+          //ex:沙發的其他系列
+          const Data = filteredData.filter(item => {
             return item.category_series === vm.$route.params.series;
           });
           return Data;

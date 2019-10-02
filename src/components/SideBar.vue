@@ -1,25 +1,16 @@
 <template>
   <div class="sideNav" id="sideNav">
-    <a
-      href="#"
-      class="menuBtn position-fixed d-md-block d-none"
-      @click.prevent="flyoutShown"
-      id="menuBtn"
-    >
+    <a href="#" class="menuBtn d-md-block d-none" @click.prevent="flyoutShown" id="menuBtn">
       <div class="btnBar"></div>
       <div class="btnBar"></div>
       <div class="btnBar"></div>
     </a>
     <div class="side-bar d-md-block d-none">
-      <!-- <a href="#" class="menuBtn position-fixed" @click.prevent="flyoutShown" id="menuBtn">
-        <div class="btnBar"></div>
-        <div class="btnBar"></div>
-        <div class="btnBar"></div>
-      </a>-->
       <h3 class="side-bar-title m-0">ASIN DESIGN SENCE 2019</h3>
     </div>
     <nav class="flyout negative-row-margin">
       <div class="flyout-content">
+        <!-- 以下為折疊的List -->
         <ul class="navbar-nav p-0" id="accordion">
           <li class="nav-item">
             <div class="card border-0">
@@ -32,7 +23,6 @@
                   >沙發 SOFAS</button>
                 </h5>
               </div>
-
               <div
                 id="collapseOne"
                 class="collapse"
@@ -54,6 +44,7 @@
               </div>
             </div>
           </li>
+
           <li class="nav-item">
             <div class="card border-0">
               <div class="card-header p-0 border-0 bg-white" id="headingTwo">
@@ -65,7 +56,6 @@
                   >椅子 CHAIRS</button>
                 </h5>
               </div>
-
               <div
                 id="collapseTwo"
                 class="collapse"
@@ -87,6 +77,7 @@
               </div>
             </div>
           </li>
+
           <li class="nav-item">
             <div class="card border-0">
               <div class="card-header p-0 border-0 bg-white" id="headingThree">
@@ -98,7 +89,6 @@
                   >桌子 TABLES</button>
                 </h5>
               </div>
-
               <div id="collapseThree" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <ul class="navbar-nav mr-auto">
@@ -115,6 +105,7 @@
               </div>
             </div>
           </li>
+
           <li class="nav-item">
             <div class="card border-0">
               <div class="card-header p-0 border-0 bg-white" id="headingFour">
@@ -126,7 +117,6 @@
                   >收納系列 STORAGE</button>
                 </h5>
               </div>
-
               <div id="collapseFour" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <ul class="navbar-nav mr-auto">
@@ -152,6 +142,7 @@
 </template>
 
 <script>
+//template中 選單以router-link 來導向中文名的route，到products頁面時會利用route取得值來進行資料的filter。
 import $ from "jquery";
 export default {
   data() {
@@ -170,7 +161,7 @@ export default {
       const vm = this;
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
       vm.$http.get(api).then(response => {
-        console.log("產品頁面取得資料：", response);
+        // console.log("產品頁面取得資料：", response);
         vm.seriesList = response.data.products
           .map(item => {
             return item.category_series;
@@ -178,7 +169,8 @@ export default {
           .filter((item, index, arr) => {
             return arr.indexOf(item) === index;
           });
-        vm.seriesList.unshift("全系列");
+        vm.seriesList.unshift("所有");
+        //用於抓取商品的series
         //相關內容說明可以看productList.vue
       });
     }

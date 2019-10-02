@@ -1,21 +1,23 @@
 <template>
   <div class="container pt-md-3 pb-md-5 pgHightRevise">
-    <loading :active.sync="isLoading"></loading>
-    <div class="row">
-      <div class="col-12">
-        <div class="form-row">
+    <loading :active.sync="status.isLoading"></loading>
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <div class="row">
           <div class="col-12 col-sm">
             <div class="alert alert-primary text-center alert-rounded" role="alert">1.輸入訂單資料</div>
           </div>
           <div class="col-12 col-sm">
-            <div class="alert alert-light text-center alert-rounded" role="alert">2.金流付款</div>
+            <div class="alert border-primary text-center alert-rounded" role="alert">2.金流付款</div>
           </div>
           <div class="col-12 col-sm">
-            <div class="alert alert-light text-center alert-rounded" role="alert">3.完成</div>
+            <div class="alert border-primary text-center alert-rounded" role="alert">3.完成</div>
           </div>
         </div>
       </div>
-      <form class="col-md-7 mt-md-3 px-4">
+    </div>
+    <div class="row mt-md-4">
+      <form class="col-md-7 px-4">
         <div class="form-row mb-3">
           <div class="col-12 h5 mb-3 text-center">訂單資訊</div>
           <div class="col-md-6">
@@ -93,6 +95,7 @@
           ></textarea>
         </div>
       </form>
+
       <div class="col-md-5 border shadow d-flex flex-column">
         <div class="h5 text-center mt-3">您的訂單</div>
         <table class="table mt-3">
@@ -129,33 +132,37 @@
               <div class="form-check ml-auto">
                 <input
                   class="form-check-input"
+                  :class="{'is-invalid':errors.has('payment')}"
                   type="radio"
                   name="payment"
                   id="CVS_COD"
                   value="CVS_COD"
                   v-model="order.user.payment_method"
                   checked
-                  required
+                  v-validate="'required'"
                 />
                 <label class="form-check-label mr-3" for="CVS_COD">超商付款</label>
               </div>
               <div class="form-check">
                 <input
                   class="form-check-input"
+                  :class="{'is-invalid':errors.has('payment')}"
                   type="radio"
                   name="payment"
                   id="credit_card"
                   value="credit_card"
                   v-model="order.user.payment_method"
+                  v-validate="'required'"
                 />
                 <label class="form-check-label" for="credit_card">信用卡付款</label>
               </div>
+              <div class="text-danger" v-if="errors.has('payment')">請選擇付款方式</div>
             </div>
           </div>
 
-          <a href="#" class="btn btn-outline-success btn-block mt-4" @click.prevent="createOrder">
-            <i class="fas fa-spinner fa-spin" v-if="uploadCart"></i>送出訂單
-          </a>
+          <button class="btn btn-outline-success btn-block mt-4" @click.prevent="createOrder">
+            <i class="fas fa-spinner fa-spin" v-if="status.uploadCart"></i>送出訂單
+          </button>
         </div>
       </div>
     </div>
@@ -164,12 +171,16 @@
 
 <script>
 //上面表單使用vee-validate套件來做驗證，errors為套件所提供的變數，其可調用has,first等方法，has內的值指向input的name屬性。
+import $ from "jquery";
 export default {
   data() {
     return {
-      isLoading: false,
-      uploadCart: false,
-      cartData: {},
+      status: {
+        isLoading: false,
+        uploadCart: false
+      },
+      cartData: {}, //取得的購物車資料
+      //建立訂單資料用以傳送到後端
       order: {
         user: {},
         message: ""
@@ -177,40 +188,47 @@ export default {
     };
   },
   methods: {
+    //取得購物車資料
     getCartData() {
       const vm = this;
-      vm.isLoading = true;
+      vm.status.isLoading = true;
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
       vm.$http.get(api).then(response => {
-        console.log("取得購物車資料：", response);
+        // console.log("取得購物車資料：", response);
         vm.cartData = response.data.data;
-        vm.isLoading = false;
+        vm.status.isLoading = false;
       });
     },
-    createOrder() {
+    //建立訂單資料並傳送
+    createOrder(e) {
       const vm = this;
-      vm.uploadCart = true;
+      $(e.target).attr("disabled", true); //避免重複點擊
+      vm.status.uploadCart = true;
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order`;
       const order = vm.order;
+      //利用vee validator進行驗證，這邊是防止資料不完全則無法通過的語法
       this.$validator.validate().then(valid => {
         if (valid) {
           vm.$http.post(api, { data: order }).then(response => {
-            console.log("建立訂單：", response);
+            // console.log("建立訂單：", response);
             if (response.data.success) {
               vm.$bus.$emit("reGetCart");
               vm.$router.push(`/customercheckout/${response.data.orderId}`);
-              vm.uploadCart = false;
+              vm.status.uploadCart = false;
+              $(e.target).removeAttr("disabled");
             } else {
-              vm.uploadCart = false;
+              vm.status.uploadCart = false;
               vm.$bus.$emit(
                 "message:push",
                 "訂單建立失敗，請洽客服人員",
                 "danger"
               );
+              $(e.target).removeAttr("disabled");
             }
           });
         } else {
-          vm.uploadCart = false;
+          vm.status.uploadCart = false;
+          $(e.target).removeAttr("disabled");
         }
       });
     }

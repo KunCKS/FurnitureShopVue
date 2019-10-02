@@ -4,7 +4,7 @@
     <side-bar></side-bar>
     <div class="pl-md-8">
       <div class="container">
-        <nav-bar class="bg-white navBar-padding-revise negative-row-margin"></nav-bar>
+        <nav-bar></nav-bar>
       </div>
       <router-view />
     </div>
@@ -15,16 +15,12 @@
 </template>
 
 <script>
+//除了後台以外，全部的route都有NavBar、SideBar及Footer，所以將這三個元件放在這邊，另外利用 event bus 來顯示提醒訊息的Alert也建立在這提供index下的子route使用
 import Alert from "../Alert";
 import sideBar from "../SideBar";
 import navBar from "../NavBar";
 import footerContent from "../FooterContent";
 export default {
-  // data(){
-  //   return{
-  //     isSignedIn:false,
-  //   }
-  // },
   components: {
     sideBar,
     navBar,

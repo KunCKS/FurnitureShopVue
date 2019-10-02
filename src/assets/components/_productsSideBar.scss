@@ -1,6 +1,3 @@
-.products-side-bar-title {
-  font-size: 1.2rem;
-}
 .products-side-bar {
   z-index: 39;
   .nav-link {
@@ -19,5 +16,8 @@
     &:hover:after {
       width: 2.5rem;
     }
+  }
+  .dropdown-toggle {
+    white-space: normal;
   }
 }

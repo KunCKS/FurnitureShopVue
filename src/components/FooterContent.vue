@@ -16,30 +16,30 @@
     </ul>
     <ul class="list-inline text-center">
       <li class="list-inline-item">
-        <a href="#" class="footer-icon-link">
+        <a href="https://github.com/KunCKS" class="footer-icon-link">
           <i class="fab fa-facebook-f"></i>
         </a>
       </li>
       <li class="list-inline-item">
-        <a href="#" class="footer-icon-link">
+        <a href="https://github.com/KunCKS" class="footer-icon-link">
           <i class="fab fa-instagram"></i>
         </a>
       </li>
       <li class="list-inline-item">
-        <a href="#" class="footer-icon-link">
+        <a href="https://github.com/KunCKS" class="footer-icon-link">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
       <li class="list-inline-item">
-        <a href="#" class="footer-icon-link">
+        <a href="https://github.com/KunCKS" class="footer-icon-link">
           <i class="fab fa-github"></i>
         </a>
       </li>
     </ul>
-    <div class="text-center footer-title">僅做為個人學習使用，非商業用途。</div>
-    <div class="text-center footer-title mt-3">
+    <div class="text-center footer-title text-primary">僅做為個人學習使用，非商業用途。</div>
+    <div class="text-center footer-title mt-3 text-primary">
       2019 ©
-      <a href="#" class="text-primary">ChenKunSheng</a>
+      <a href="https://github.com/KunCKS" class="text-primary">ChenKunSheng</a>
     </div>
   </div>
 </template>

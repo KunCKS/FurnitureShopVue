@@ -12,7 +12,7 @@
       position: relative;
       width: 70%;
       height: 0;
-      padding-bottom: 70%;
+      padding-bottom: 70%; //利用當 height: 0 時，padding-bottom會以父元素寬度為基準計算百分比，這樣就能使高度及寬度依一定比例縮放，這邊將img-section作為父元素來當基準
       background-position: center 60%;
       background-size: cover;
       &:after {
@@ -38,15 +38,17 @@
         top: 15%;
         width: 80%;
         height: 0;
-        padding-bottom: 70%;
+        padding-bottom: 70%; //利用當 height: 0 時，padding-bottom會以父元素寬度為基準計算百分比，這樣就能使高度及寬度依一定比例縮放
         z-index: 2;
         background-position: center 60%;
         background-size: cover;
         transform: translateX(0);
         transition: transform 0.8s;
+        //頁面右側為圖片時
         &.right {
           left: -10%;
         }
+        //頁面左側為圖片時
         &.left {
           right: -10%;
         }
@@ -59,10 +61,12 @@
         @include media-breakpoint-up(md) {
           font-size: 4rem;
         }
+        //頁面右側為圖片時
         &.right {
           right: 0;
           transform: rotate(90deg);
         }
+        //頁面左側為圖片時
         &.left {
           left: 0;
           transform: rotate(-90deg);

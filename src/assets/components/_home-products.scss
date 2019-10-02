@@ -1,6 +1,7 @@
+//左上標題樣式
 .big-title {
   .name {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     @include media-breakpoint-up(md) {
       font-size: 1.75rem;
     }
@@ -17,9 +18,9 @@
     line-height: 1.2;
   }
 }
+
 .home-products {
   padding: 6rem 0;
-
   .items {
     &.negative-margin {
       margin-top: 0;
@@ -27,6 +28,7 @@
         margin-top: -5rem;
       }
     }
+    //當游標hover a連結時，動態呈現邊框且標題的漸層背景色跟著消失
     & > a {
       display: block;
       position: relative;
@@ -73,7 +75,10 @@
         opacity: 1;
       }
       color: #ffffff;
-      background: linear-gradient(rgba(#24242424, 0), rgba(#24242424, 0.8));
+      background: linear-gradient(
+        rgba(#24242424, 0),
+        rgba(#24242424, 0.8)
+      ); //標題的半透明漸層色
       .eng {
         font-weight: 600;
         font-size: 1.25rem;
@@ -85,7 +90,7 @@
       h3 {
         position: relative;
         display: inline-block;
-        font-size: 0.5rem;
+        font-size: 0.75rem;
         margin: 0;
         @include media-breakpoint-up(md) {
           font-size: 1.25rem;
