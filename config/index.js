@@ -41,7 +41,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, "../dist"),
     assetsSubDirectory: "static",
-    assetsPublicPath: "https://kuncks.github.io/FurnitureShop_ghPages/",
+    assetsPublicPath: "/FurnitureShopVue/",
 
     /**
      * Source Maps
