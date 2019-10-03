@@ -3,49 +3,49 @@
     <div class="row no-gutters">
       <div class="col-3 img-wall border border-secondary">
         <router-link to="/product/-LpYLxew6t8FkPJ1a2k9" class="w-100">
-          <img src="../../static/images/furniture-1-0.jpg" alt class="img-wall-img w-100" />
+          <img src="../../static/img/furniture-1-0.jpg" alt class="img-wall-img w-100" />
           <div class="img-wall-overlay"></div>
         </router-link>
       </div>
       <div class="col-3 img-wall border border-secondary">
         <router-link to="/product/-LpXSNOX3OTXSDYvAmlC" class="w-100">
-          <img src="../../static/images/furniture-1-1.jpg" alt class="img-wall-img w-100" />
+          <img src="../../static/img/furniture-1-1.jpg" alt class="img-wall-img w-100" />
           <div class="img-wall-overlay"></div>
         </router-link>
       </div>
       <div class="col-3 img-wall border border-secondary">
         <router-link to="/product/-LpXSNOX3OTXSDYvAmlC" class="w-100">
-          <img src="../../static/images/furniture-1-2.jpg" alt class="img-wall-img w-100" />
+          <img src="../../static/img/furniture-1-2.jpg" alt class="img-wall-img w-100" />
           <div class="img-wall-overlay"></div>
         </router-link>
       </div>
       <div class="col-3 img-wall border border-secondary">
         <router-link to="/product/-LpXSNOX3OTXSDYvAmlC" class="w-100">
-          <img src="../../static/images/furniture-1-3.jpg" alt class="img-wall-img w-100" />
+          <img src="../../static/img/furniture-1-3.jpg" alt class="img-wall-img w-100" />
           <div class="img-wall-overlay"></div>
         </router-link>
       </div>
       <div class="col-3 img-wall border border-secondary">
         <router-link to="/product/-LpYLxew6t8FkPJ1a2k9" class="w-100">
-          <img src="../../static/images/furniture-1-4.jpg" alt class="img-wall-img w-100" />
+          <img src="../../static/img/furniture-1-4.jpg" alt class="img-wall-img w-100" />
           <div class="img-wall-overlay"></div>
         </router-link>
       </div>
       <div class="col-3 img-wall border border-secondary">
         <router-link to="/product/-LpYLxew6t8FkPJ1a2k9" class="w-100">
-          <img src="../../static/images/furniture-1-5.jpg" alt class="img-wall-img w-100" />
+          <img src="../../static/img/furniture-1-5.jpg" alt class="img-wall-img w-100" />
           <div class="img-wall-overlay"></div>
         </router-link>
       </div>
       <div class="col-3 img-wall border border-secondary">
         <router-link to="/product/-LpYLxew6t8FkPJ1a2k9" class="w-100">
-          <img src="../../static/images/furniture-1-6.jpg" alt class="img-wall-img w-100" />
+          <img src="../../static/img/furniture-1-6.jpg" alt class="img-wall-img w-100" />
           <div class="img-wall-overlay"></div>
         </router-link>
       </div>
       <div class="col-3 img-wall border border-secondary">
         <router-link to="/product/-LpXSNOX3OTXSDYvAmlC" class="w-100">
-          <img src="../../static/images/furniture-1-7.jpg" alt class="img-wall-img w-100" />
+          <img src="../../static/img/furniture-1-7.jpg" alt class="img-wall-img w-100" />
           <div class="img-wall-overlay"></div>
         </router-link>
       </div>

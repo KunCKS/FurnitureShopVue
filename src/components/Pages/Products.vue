@@ -81,9 +81,9 @@ export default {
   mounted() {
     //當 scrollTop() 大於某高度時，動態添加 ClassName
     $(window).scroll(() => {
-      //如果頁面不在/products及其子route時，則不再進行scroll監視。
+      // //如果頁面不在/products及其子route時，則不再進行scroll監視。
       if (this.$route.fullPath.indexOf("/products") !== 0) {
-        $(window).unbind("scroll");
+        //   $(window).unbind("scroll");
         return; //return 退出函式，否則下面語法一樣會執行一次。
       }
       if ($(window).scrollTop() > 90) {
