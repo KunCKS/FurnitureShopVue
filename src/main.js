@@ -60,6 +60,9 @@ router.beforeEach((to, from, next) => {
     //記得這邊要再調用一次next()，否則會守衛會卡住頁面等待你下指令ＱＱ
   }
 });
+router.afterEach((to, from, next) => {
+  window.scrollTo(0, 0);
+});
 
 /* eslint-disable no-new */
 new Vue({

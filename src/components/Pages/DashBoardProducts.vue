@@ -362,7 +362,8 @@ export default {
     //忘記有ref屬性啦！！這邊不使用勒！
   },
   created() {
-    this.getProductsData();
+    const vm = this;
+    vm.getProductsData();
   }
 };
 </script>

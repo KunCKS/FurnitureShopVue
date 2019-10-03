@@ -158,7 +158,7 @@
               <div class="col-4">
                 <div class="products-card-originPrice text-right">
                   原價
-                  <strike>{{item.origin_price|currency}}</strike>
+                  <del>{{item.origin_price|currency}}</del>
                 </div>
                 <div class="products-card-price text-right">特價 {{item.price|currency}}</div>
               </div>
@@ -214,7 +214,7 @@ export default {
       vm.status.isLoading = true;
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
       vm.$http.get(api).then(response => {
-        // console.log("產品頁面取得資料：", response);
+        console.log("產品頁面取得資料：", response);
         vm.productsData = response.data.products;
         vm.seriesList = response.data.products
           .map(item => {

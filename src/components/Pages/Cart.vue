@@ -3,14 +3,15 @@
     <loading :active.sync="status.isLoading"></loading>
     <div class="row">
       <!--    左側購物清單    -->
-      <div class="col-md-8">
+      <div class="col-md-7">
         <div class="h4 text-center">購 物 車 清 單</div>
         <table class="table" v-if="cartData.carts.length >= 1">
           <thead>
-            <th width="30"></th>
+            <th width="25"></th>
             <th colspan="2">品名</th>
+            <th width="90" class="d-md-table-cell d-none">單價</th>
             <th width="75" class="text-center">數量</th>
-            <th width="90">單價</th>
+            <th width="90">小計</th>
           </thead>
           <tbody>
             <tr v-for="(item,index) in cartData.carts" :key="item.id">
@@ -37,12 +38,15 @@
                   {{item.product.title}}
                 </div>
               </td>
+              <td class="align-middle text-right d-md-table-cell d-none">
+                <span class="text-success">{{item.product.price|currency}}</span>
+                <del class="text-muted">{{item.product.origin_price|currency}}</del>
+              </td>
               <td class="align-middle text-center">
                 <div class>{{item.qty}}/{{item.product.unit}}</div>
               </td>
               <td class="align-middle text-right">
-                <span class="text-success">{{item.product.price|currency}}</span>
-                <del class="text-muted">{{item.product.origin_price|currency}}</del>
+                <span class>{{item.product.price * item.qty |currency}}</span>
               </td>
             </tr>
           </tbody>
@@ -53,44 +57,41 @@
         </div>
       </div>
       <!--    右側購物小計    -->
-      <div class="col-md-4 mt-md-0 mt-2">
+      <div class="col-md-5 my-md-0 my-2">
         <div class="border p-3 shadow">
           <div class="h5 text-center border-bottom pb-2">購 物 車 合 計</div>
-          <div class="d-flex">
+          <div class="d-flex py-2">
             <h6>總計</h6>
             <span class="ml-auto" v-if="cartData.total">{{cartData.total|currency}}</span>
           </div>
-          <div class="d-flex">
-            <div class="d-flex" v-if="cartData.final_total < cartData.total">
+          <div class="d-flex py-2" v-if="cartData.final_total < cartData.total">
+            <div class="d-flex">
               <h6>折扣價</h6>
               <small class="text-success">(已套用coupon優惠)</small>
             </div>
-            <span
-              class="ml-auto text-success"
-              v-if="cartData.final_total < cartData.total"
-            >{{cartData.final_total|currency}}</span>
+            <span class="ml-auto text-success">{{cartData.final_total|currency}}</span>
           </div>
-          <div class="input-group mb-3">
+          <div class="input-group">
             <input
               type="text"
               class="form-control"
               placeholder="請輸入優惠碼"
               v-model="couponCode"
               @keyup.enter="useCoupon"
+              style="font-size:0.875rem"
             />
             <div class="input-group-append">
               <button
-                class="btn btn-outline-primary"
+                class="btn btn-sm btn-outline-primary"
                 type="button"
                 id="button-addon2"
                 @click="useCoupon"
               >套用優惠碼</button>
             </div>
-            <small
-              class="ml-auto text-success py-1"
-              v-if="cartData.final_total >= cartData.total"
-            >現在輸入OPEN50OFF即可享有折扣價喔!</small>
           </div>
+          <small class="ml-auto text-success py-1 d-block mb-3">
+            <span v-if="cartData.final_total >= cartData.total">現在輸入OPEN50OFF即可享有折扣價喔!</span>
+          </small>
           <router-link
             class="btn btn-outline-success btn-block"
             :class="{'disabled':cartData.carts.length < 1}"

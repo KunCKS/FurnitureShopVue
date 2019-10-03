@@ -15,7 +15,7 @@
       <div class="btnBar"></div>
     </a>
     <router-link class="p-0 mx-md-0 ml-6" to="/home">
-      <img src="../assets/ASIN_logo.svg" style="width:80px" alt />
+      <img src="../assets/Logo.svg" style="width:80px" alt />
     </router-link>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
@@ -177,7 +177,6 @@ export default {
     flyoutShown() {
       $("#menuBtnInNavBar").toggleClass("menuBtn-shown");
       $("#sideNav").toggleClass("shown");
-      $("#menuBtnInNavBar").toggleClass("menuBtn-shown");
       //點擊替換className達到sidebar動畫效果
     }
   },

@@ -255,7 +255,7 @@ export default {
     toProductPage(id) {
       const vm = this;
       vm.$router.push(`/product/${id}`);
-      $(window).scrollTop(0);
+      // $(window).scrollTop(0);
       vm.getProductData();
     }
   },

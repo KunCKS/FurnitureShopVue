@@ -3,6 +3,7 @@
 //   padding-left: $sidebar-revise-width;
 // }
 .menuBtn {
+  //這邊設定btn位置，其他樣式在_menuBtn.scss
   position: fixed;
   left: calc((4.5rem - 24px) / 2);
   //這邊帶入sidebar寬度及btn寬度來計算左側padding的距離

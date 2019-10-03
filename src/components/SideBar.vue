@@ -154,7 +154,7 @@ export default {
     flyoutShown() {
       $("#menuBtn").toggleClass("menuBtn-shown");
       $("#sideNav").toggleClass("shown");
-      $("#menuBtnInNavBar").toggleClass("menuBtn-shown");
+      // $("#menuBtnInNavBar").toggleClass("menuBtn-shown");
       //點擊替換className達到sidebar動畫效果
     },
     getProductData() {
